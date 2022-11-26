@@ -1,0 +1,16 @@
+    .banner {
+        position: relative;
+    }
+
+    .banner::after {
+        content: "";
+        background-image: url('../../../assets/banner.webp');
+        background-size: cover;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        opacity: 0.4;
+        z-index: -1;
+    }
