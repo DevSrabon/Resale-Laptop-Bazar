@@ -87,21 +87,7 @@ const AddProduct = () => {
 						<p className="text-red-600">{errors.name?.message}</p>
 					)}
 				</div>
-				<div className="form-control w-full max-w-xs">
-					<label className="label">
-						<span className="label-text">Email</span>
-					</label>
-					<input
-						className="input input-bordered w-full max-w-xs"
-						type="text"
-						{...register("email", {
-							required: "Email Address is required",
-						})}
-					/>
-					{errors.email && (
-						<p className="text-red-600">{errors.email?.message}</p>
-					)}
-				</div>
+				
 				<div className="form-control w-full max-w-xs">
 					<label className="label">
 						<span className="label-text">Specialty</span>
