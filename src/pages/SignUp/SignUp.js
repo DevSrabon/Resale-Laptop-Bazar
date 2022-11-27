@@ -1,24 +1,26 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
-// import useToken from "../../hooks/useToken";
+import useToken from "../../hooks/useToken";
 const SignUp = () => {
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-	// const [createdUserEmail, setCreatedUserEmail] = useState("");
-	// const [token] = useToken(createdUserEmail);
+	const [createdUserEmail, setCreatedUserEmail] = useState("");
+	const [token] = useToken(createdUserEmail);
 	const navigate = useNavigate();
+	const location = useLocation();
 
-	// if (token) {
-	// 	navigate("/");
-	// }
 
-	const { createUser, updateUser } = useContext(AuthContext);
+	if (token) {
+		navigate("/");
+	}
+
+	const { createUser, updateUser, googleLogin } = useContext(AuthContext);
 	const [signUError, setSignUpError] = useState(true);
 	const handleSignUp = (data) => {
 		console.log(data);
@@ -33,7 +35,7 @@ const SignUp = () => {
 				};
 				updateUser(userInfo)
 					.then(() => {
-                        // savedUser(data.name, data.email);
+                        savedUser(data.name, data.email, data.role);
                     navigate('/')
 					})
 					.catch((err) => console.error(err));
@@ -42,20 +44,32 @@ const SignUp = () => {
 				setSignUpError(err.message);
 			});
 	};
-	// const savedUser = (name, email) => {
-	// 	const user = { name, email };
-	// 	fetch(`${process.env.REACT_APP_API_URL}/users`, {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"content-type": "application/json",
-	// 		},
-	// 		body: JSON.stringify(user),
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			// setCreatedUserEmail(email);
-	// 		});
-	// };
+	const from = location.state?.from?.pathname || "/";
+
+	const handleGoogleSignIn = () => {
+		setSignUpError("");
+		googleLogin()
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+				navigate(from, { replace: true });
+			})
+			.catch();
+	};
+	const savedUser = (name, email, role) => {
+		const user = { name, email, role };
+		fetch(`${process.env.REACT_APP_API_URL}/users`, {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(user),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setCreatedUserEmail(email);
+			});
+	};
 
 	return (
 		<div className="h-[800px] flex justify-center items-center ">
@@ -105,12 +119,24 @@ const SignUp = () => {
 									value: 6,
 									message: "Password must be six character or longer",
 								},
-								
 							})}
 						/>
 						{errors.password && (
 							<p className="text-red-600">{errors.password?.message}</p>
 						)}
+					</div>
+					<div className="form-control w-full max-w-xs">
+						<label className="label">
+							<span className="label-text">Select Account Type</span>
+						</label>
+						<select
+							{...register("role", {
+								required: "Role is required",
+							})}
+							className="select input-bordered w-full max-w-xs">
+							<option value="seller">Seller</option>
+							<option value="buyer">Buyer</option>
+						</select>
 					</div>
 					<input
 						className="btn btn-accent w-full mt-3"
@@ -118,6 +144,16 @@ const SignUp = () => {
 						type="submit"
 					/>
 					{signUError && <p>{signUError}</p>}
+					<div className="divider">OR</div>
+					<button
+						{...register("role", {
+							required: "Role is required",
+						})}
+						onClick={handleGoogleSignIn}
+						value='buyer'
+						className="btn btn-outline w-full">
+						CONTINUE WITH GOOGLE
+					</button>
 				</form>
 				<p className="mt-3 text-center">
 					Already have an account?{" "}

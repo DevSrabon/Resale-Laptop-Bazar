@@ -3,7 +3,7 @@ import React from 'react';
 const Category = ({ home }) => {
     const { brand, img } = home;
     return (
-			<div className="card w-full p-5 bg-base-100 shadow-xl">
+			<div className="card w-full p-5 bg-base-100 shadow-2xl">
 				<figure>
 					<img className='w-full h-60' src={img} alt="Shoes" />
 				</figure>

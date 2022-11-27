@@ -189,6 +189,25 @@ const AddProduct = () => {
 				</div>
 				<div className="form-control w-full max-w-xs">
 					<label className="label">
+						<span className="label-text">Phone Number</span>
+					</label>
+					<input
+						className="input input-bordered w-full max-w-xs"
+						type="number"
+						{...register("phone", {
+							required: "Phone number is required",
+							minLength: {
+								value: 11,
+								message: "Number Should be 11 character or longer",
+							},
+						})}
+					/>
+					{errors.phone && (
+						<p className="text-red-600">{errors.phone?.message}</p>
+					)}
+				</div>
+				<div className="form-control w-full max-w-xs">
+					<label className="label">
 						<span className="label-text">Photo</span>
 					</label>
 					<input

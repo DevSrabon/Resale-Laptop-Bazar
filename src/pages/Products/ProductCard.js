@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
 				<figure className="px-10 pt-10">
 					<img src={image} alt="Shoes" className="rounded-xl" />
 				</figure>
-				<div className="card-body items-center text-center">
+				<div className="card-body items-center">
 					<h2 className="card-title">Brand: {brand}</h2>
 					<p className="text-lg font-semibold"> Model: {model}</p>
 					<p> Year of Used: {used} years</p>
@@ -18,10 +18,10 @@ const ProductCard = ({ product }) => {
 					</div>
 					<p>Location: {location}</p>
 					<p>
-						Post Date: {moment.utc(date).local().startOf("seconds").fromNow()}
+						Post Time: {moment.utc(date).local().startOf("seconds").fromNow()}
 					</p>
 					<div className="card-actions">
-						<button className="btn btn-primary">Buy Now</button>
+						<button className="btn btn-primary">Book Now</button>
 					</div>
 				</div>
 			</div>
