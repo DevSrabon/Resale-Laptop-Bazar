@@ -7,6 +7,7 @@ import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
+import MyProducts from "../pages/MyProducts/MyProducts";
 import Products from "../pages/Products/Products";
 import SignUp from "../pages/SignUp/SignUp";
 
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
 			{
 				path: "/signup",
 				element: <SignUp />,
+			},
+			{
+				path: "/myproduct",
+				element: <MyProducts />,
 			},
 			{
 				path: "product/:id",
