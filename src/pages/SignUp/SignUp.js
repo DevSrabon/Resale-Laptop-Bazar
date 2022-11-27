@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, useLocation, useNavigate} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useToken from "../../hooks/useToken";
 const SignUp = () => {
@@ -13,14 +13,12 @@ const SignUp = () => {
 	const [createdUserEmail, setCreatedUserEmail] = useState("");
 	const [token] = useToken(createdUserEmail);
 	const navigate = useNavigate();
-	const location = useLocation();
-
 
 	if (token) {
 		navigate("/");
 	}
 
-	const { createUser, updateUser, googleLogin } = useContext(AuthContext);
+	const { createUser, updateUser, } = useContext(AuthContext);
 	const [signUError, setSignUpError] = useState(true);
 	const handleSignUp = (data) => {
 		console.log(data);
@@ -44,18 +42,8 @@ const SignUp = () => {
 				setSignUpError(err.message);
 			});
 	};
-	const from = location.state?.from?.pathname || "/";
 
-	const handleGoogleSignIn = () => {
-		setSignUpError("");
-		googleLogin()
-			.then((result) => {
-				const user = result.user;
-				console.log(user);
-				navigate(from, { replace: true });
-			})
-			.catch();
-	};
+	
 	const savedUser = (name, email, role) => {
 		const user = { name, email, role };
 		fetch(`${process.env.REACT_APP_API_URL}/users`, {
@@ -134,8 +122,8 @@ const SignUp = () => {
 								required: "Role is required",
 							})}
 							className="select input-bordered w-full max-w-xs">
-							<option value="seller">Seller</option>
-							<option value="buyer">Buyer</option>
+							<option value="Seller">Seller</option>
+							<option value="Buyer">Buyer</option>
 						</select>
 					</div>
 					<input
@@ -144,16 +132,6 @@ const SignUp = () => {
 						type="submit"
 					/>
 					{signUError && <p>{signUError}</p>}
-					<div className="divider">OR</div>
-					<button
-						{...register("role", {
-							required: "Role is required",
-						})}
-						onClick={handleGoogleSignIn}
-						value='buyer'
-						className="btn btn-outline w-full">
-						CONTINUE WITH GOOGLE
-					</button>
 				</form>
 				<p className="mt-3 text-center">
 					Already have an account?{" "}

@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../pages/Shared/Loading/Loading";
+import Loading from "../../Shared/Loading/Loading";
 
 const AddProduct = () => {
 	const {
@@ -76,7 +76,7 @@ const AddProduct = () => {
 		return <Loading></Loading>;
 	}
 	return (
-		<div className="w-96 p-7 shadow-2xl">
+		<div className="w-96 mx-auto p-7 my-10 shadow-2xl rounded-lg">
 			<h3 className="text-3xl"> Sell A Laptop</h3>
 			<form onSubmit={handleSubmit(handleAddProduct)}>
 				<div className="form-control w-full max-w-xs">

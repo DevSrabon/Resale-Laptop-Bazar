@@ -11,7 +11,7 @@ const Products = () => {
 					{products?.[0].brand} Laptops
             </h4>
            
-				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4">
+				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4 mb-5">
 					{products.map((product) => (
 						<ProductCard key={product._id} product={product} />
 					))}

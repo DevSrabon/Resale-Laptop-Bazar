@@ -4,9 +4,9 @@ const ProductCard = ({ product }) => {
     const { image, brand, originalPrice, resellPrice, used, location, model, date } = product;
    
     return (
-			<div className="card w-96 bg-base-100 shadow-xl  text-center">
-				<figure className="px-10 pt-10">
-					<img src={image} alt="Shoes" className="rounded-xl" />
+			<div className="card w-full h-[500px] bg-base-100 shadow-xl  text-center">
+				<figure className="px-10 mt-5">
+					<img src={image} alt="Shoes" className="rounded-lg" />
 				</figure>
 				<div className="card-body items-center">
 					<h2 className="card-title">Brand: {brand}</h2>
