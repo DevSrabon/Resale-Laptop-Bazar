@@ -69,14 +69,14 @@ const AllUsers = () => {
 										<td>{user.email}</td>
 										<td>{user.role}</td>
                                         <td>
-                                            {
-                                                isLoading &&
+                                           
 											<button
-												onClick={() => handleDeleteUser(user)}
-												className="btn btn-sm btn-error text-white">
+                                                        onClick={() => handleDeleteUser(user)}
+                                                        disabled={isLoading}
+												className="btn btn-sm btn-danger text-white">
 												Delete
 											</button>
-                                            }
+                                          
 										</td>
 									</tr>
 								))}
