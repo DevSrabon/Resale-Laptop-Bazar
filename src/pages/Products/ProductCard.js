@@ -1,7 +1,4 @@
-import React, { useContext, useState } from "react";
 import moment from "moment";
-// import { AuthContext } from "../../contexts/AuthProvider";
-// import toast from "react-hot-toast";
 const ProductCard = ({ product, setModal }) => {
 	const {
 		image,
@@ -13,7 +10,6 @@ const ProductCard = ({ product, setModal }) => {
 		model,
 		date,
 	} = product;
-// const [disabled, setDisabled] = useState(false)
 
 	return (
 		<div className="card w-full h-[500px] bg-base-100 shadow-xl  text-center">

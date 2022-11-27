@@ -16,6 +16,7 @@ const BookingModal = ({ modal,  setModal }) => {
 		const form = e.target;
 		console.log(form);
 		const name = form.name.value;
+		const model = form.model.value;
 		const price = form.price.value;
 		const email = form.email.value;
 		const phone = form.phone.value;
@@ -24,7 +25,8 @@ const BookingModal = ({ modal,  setModal }) => {
 			name,
 			price,
 			email,
-			phone,
+            phone,
+            model,
 			location,
 		};
 		fetch(`${process.env.REACT_APP_API_URL}/bookings`, {
