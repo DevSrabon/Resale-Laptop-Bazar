@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Category = ({ home }) => {
-    const { name, img } = home;
+    const { brand, img } = home;
     return (
 			<div className="card w-full p-5 bg-base-100 shadow-xl">
 				<figure>
@@ -10,7 +9,7 @@ const Category = ({ home }) => {
 				</figure>
 				<div className="card-body">
 					<h2 className="card-title">
-						{name}
+						{brand}
                 </h2>
                 
 				</div>

@@ -18,10 +18,10 @@ const Categories = () => {
 			<div>
 				<h1 className="text-4xl">Category</h1>
 				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4">
-                {homes.map((home) => (	
-                        <Link to={`/product/${home.name}`}>
+					{homes.map((home) => (
+						<Link key={home._id} to={`product/${home.brand}`}>
 							<Category key={home._id} home={home} />
-                        </Link>
+						</Link>
 					))}
 				</div>
 			</div>

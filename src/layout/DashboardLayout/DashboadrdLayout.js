@@ -10,7 +10,7 @@ const DashboardLayout = () => {
 	return (
 		<div>
 			<Navbar></Navbar>
-			<div className="drawer drawer-mobile">
+			<div className="drawer drawer-mobile w-11/12 mx-auto gap-3">
 				<input
 					id="dashboard-drawer"
 					type="checkbox"

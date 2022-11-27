@@ -16,11 +16,14 @@ const AddProduct = () => {
 
 	const navigate = useNavigate();
 
-	const { data: specialties, isLoading } = useQuery({
-		queryKey: ["specialty"],
+	const date = new Date();
+	console.log(date);
+
+	const { data: categories, isLoading } = useQuery({
+		queryKey: ["categories"],
 		queryFn: async () => {
 			const res = fetch(
-				"https://doctors-protal-server.vercel.app/appointmentSpecialty"
+				`${process.env.REACT_APP_API_URL}/homes`
 			);
 			const data = (await res).json();
 			return data;
@@ -42,12 +45,16 @@ const AddProduct = () => {
 				if (imgData.success) {
 					console.log(imgData.data.url);
 					const doctor = {
-						name: data.name,
-						email: data.email,
-						specialty: data.specialty,
+						model: data.model,
+						location: data.location,
+						used: data.used,
+						resellPrice: data.resellPrice,
+						originalPrice: data.originalPrice,
+						brand: data.brand,
 						image: imgData.data.url,
+						date
 					};
-					// save doctor information into the database
+					// save product information into the database
 					fetch(`${process.env.REACT_APP_API_URL}/product`, {
 						method: "POST",
 						headers: {
@@ -59,7 +66,7 @@ const AddProduct = () => {
 						.then((res) => res.json())
 						.then((result) => {
 							console.log(result);
-							toast.success(`${data.name} is added successfully`);
+							toast.success(`${data.brand} is added successfully`);
 							navigate("/");
 						});
 				}
@@ -70,34 +77,112 @@ const AddProduct = () => {
 	}
 	return (
 		<div className="w-96 p-7 shadow-2xl">
-			<h3 className="text-3xl"> Add A New Doctor</h3>
+			<h3 className="text-3xl"> Sell A Laptop</h3>
 			<form onSubmit={handleSubmit(handleAddProduct)}>
 				<div className="form-control w-full max-w-xs">
 					<label className="label">
-						<span className="label-text">Name</span>
+						<span className="label-text">Model</span>
 					</label>
 					<input
 						className="input input-bordered w-full max-w-xs"
 						type="text"
-						{...register("name", {
-							required: "Name Address is required",
+						{...register("model", {
+							required: "Model is required",
 						})}
 					/>
-					{errors.name && (
-						<p className="text-red-600">{errors.name?.message}</p>
+					{errors.model && (
+						<p className="text-red-600">{errors.model?.message}</p>
 					)}
 				</div>
-				
 				<div className="form-control w-full max-w-xs">
 					<label className="label">
-						<span className="label-text">Specialty</span>
+						<span className="label-text">Location</span>
+					</label>
+					<input
+						className="input input-bordered w-full max-w-xs"
+						type="text"
+						{...register("location", {
+							required: "Location is required",
+						})}
+					/>
+					{errors.location && (
+						<p className="text-red-600">{errors.location?.message}</p>
+					)}
+				</div>
+				<div className="flex gap-3">
+					<div className="form-control w-full max-w-xs">
+						<label className="label">
+							<span className="label-text">Original Price</span>
+						</label>
+						<input
+							className="input input-bordered w-full max-w-xs"
+							type="text"
+							{...register("originalPrice", {
+								required: "Original Price is required",
+							})}
+						/>
+						{errors.originalPrice && (
+							<p className="text-red-600">{errors.originalPrice?.message}</p>
+						)}
+					</div>
+					<div className="form-control w-full max-w-xs">
+						<label className="label">
+							<span className="label-text">Resale Price</span>
+						</label>
+						<input
+							className="input input-bordered w-full max-w-xs"
+							type="text"
+							{...register("resellPrice", {
+								required: "Resell Price is required",
+							})}
+						/>
+						{errors.resellPrice && (
+							<p className="text-red-600">{errors.resellPrice?.message}</p>
+						)}
+					</div>
+				</div>
+
+				<div className="form-control w-full max-w-xs">
+					<label className="label">
+						<span className="label-text">Year of Used</span>
+					</label>
+					<input
+						className="input input-bordered w-full max-w-xs"
+						type="text"
+						{...register("used", {
+							required: "Year of used is required",
+						})}
+					/>
+					{errors.used && (
+						<p className="text-red-600">{errors.used?.message}</p>
+					)}
+				</div>
+
+				<div className="form-control w-full max-w-xs">
+					<label className="label">
+						<span className="label-text">Description</span>
+					</label>
+					<textarea
+						className="input input-bordered w-full max-w-xs"
+						type="text"
+						{...register("used", {
+							required: "Year of used is required",
+						})}
+					/>
+					{errors.used && (
+						<p className="text-red-600">{errors.used?.message}</p>
+					)}
+				</div>
+				<div className="form-control w-full max-w-xs">
+					<label className="label">
+						<span className="label-text">Brand</span>
 					</label>
 					<select
-						{...register("specialty")}
+						{...register("brand")}
 						className="select input-bordered w-full max-w-xs">
-						{specialties.map((specialty) => (
-							<option key={specialty._id} value={specialty.name}>
-								{specialty.name}
+						{categories.map((category) => (
+							<option key={category._id} value={category.brand}>
+								{category.brand}
 							</option>
 						))}
 					</select>
