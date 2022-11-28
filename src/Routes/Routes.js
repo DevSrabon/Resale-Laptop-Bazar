@@ -10,6 +10,7 @@ import Login from "../pages/Login/Login";
 import MyProducts from "../pages/MyProducts/MyProducts";
 import Products from "../pages/Products/Products";
 import SignUp from "../pages/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
 	{
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "product/:id",
-				element: <Products />,
+				element: <PrivateRoute><Products/></PrivateRoute>,
 				loader: ({ params }) =>
 					fetch(`${process.env.REACT_APP_API_URL}/product/${params.id}`),
 			},
