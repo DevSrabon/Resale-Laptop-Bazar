@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
-// import { setAuthToken } from "../../hooks/useAuthToken";
 import useToken from "../../hooks/useToken";
 const Login = () => {
 	const {
@@ -19,24 +18,24 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	const from = location.state?.from?.pathname || "/";
-
-	if (token) {
-		navigate(from, { replace: true });
-	}
+	useEffect(() => {
+	
+		if (token) {
+			navigate(from, { replace: true });
+		}
+	}, [from, navigate, token])
+	
 	const handleLogin = (data) => {
-		console.log(data);
 		setLoginError("");
 		signIn(data.email, data.password)
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
-				setLoading(false);
 				setLoginUserEmail(data.email);
-				navigate(from, { replace: true });
+				setLoading(false)
 				toast.success('Login Success')
 			})
 			.catch((error) => {
-				console.log(error.message);
 				setLoginError(error.message);
 			});
 	};
