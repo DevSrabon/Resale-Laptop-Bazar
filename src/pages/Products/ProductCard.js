@@ -11,7 +11,7 @@ const ProductCard = ({ product, setModal,  }) => {
 		brand,
 		originalPrice,
 		resellPrice,
-		used,
+		purchase,
 		location,
 		model,
 		date,
@@ -44,7 +44,7 @@ const ProductCard = ({ product, setModal,  }) => {
 				<h2 className="card-title">Brand: {brand}</h2>
 				<div className="font-medium">
 					<p className="text-lg font-semibold"> Model: {model}</p>
-					<p> Year of Used: {used} years</p>
+					<p> Year of purchase: {purchase} years</p>
 					<div className="flex gap-4">
 						<p> Original Price: ${originalPrice}</p>
 						<p> Resale Price: ${resellPrice}</p>

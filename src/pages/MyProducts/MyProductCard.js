@@ -8,7 +8,7 @@ const MyProductCard = ({ product, isLoading, refetch }) => {
 			brand,
 			originalPrice,
 			resellPrice,
-			used,
+			purchase,
 			location,
 			model,
         date,
@@ -44,7 +44,7 @@ const MyProductCard = ({ product, isLoading, refetch }) => {
 					<div className="card-body items-center">
 						<h2 className="card-title">Brand: {brand}</h2>
 						<p className="text-lg font-semibold"> Model: {model}</p>
-						<p> Year of Used: {used} years</p>
+						<p> Year of purchase: {purchase} years</p>
 						<div className="flex gap-4">
 							<p> Original Price: ${originalPrice}</p>
 							<p> Resale Price: ${resellPrice}</p>

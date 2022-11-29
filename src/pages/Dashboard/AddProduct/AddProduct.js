@@ -51,7 +51,7 @@ const {user} = useContext(AuthContext)
 						name: user.displayName,
 						model: data.model,
 						location: data.location,
-						used: data.used,
+						purchase: data.purchase,
 						description: data.description,
 						resellPrice: data.resellPrice,
 						originalPrice: data.originalPrice,
@@ -149,17 +149,17 @@ const {user} = useContext(AuthContext)
 
 				<div className="form-control w-full max-w-xs">
 					<label className="label">
-						<span className="label-text">Year of Used</span>
+						<span className="label-text">Year of purchase</span>
 					</label>
 					<input
 						className="input input-bordered w-full max-w-xs"
 						type="text"
-						{...register("used", {
-							required: "Year of used is required",
+						{...register("purchase", {
+							required: "Year of purchase is required",
 						})}
 					/>
-					{errors.used && (
-						<p className="text-red-600">{errors.used?.message}</p>
+					{errors.purchase && (
+						<p className="text-red-600">{errors.purchase?.message}</p>
 					)}
 				</div>
 
@@ -171,11 +171,11 @@ const {user} = useContext(AuthContext)
 						className="input input-bordered w-full max-w-xs"
 						type="text"
 						{...register("description", {
-							required: "Year of used is required",
+							required: "Year of purchase is required",
 						})}
 					/>
-					{errors.used && (
-						<p className="text-red-600">{errors.used?.message}</p>
+					{errors.purchase && (
+						<p className="text-red-600">{errors.purchase?.message}</p>
 					)}
 				</div>
 				<div className="form-control w-full max-w-xs">
