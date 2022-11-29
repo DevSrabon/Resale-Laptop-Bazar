@@ -1,29 +1,46 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Loading from '../../Shared/Loading/Loading'
 
 const Dashboard = () => {
-	const { user } = useContext(AuthContext);
+	// const { user } = useContext(AuthContext);
 
-	const url = `${process.env.REACT_APP_API_URL}/bookings?email=${user?.email}`;
-	const { data: bookings = [], isLoading } = useQuery({
-		queryKey: ["bookings", user?.email],
-		queryFn: async () => {
-			const res = await fetch(url, {
-				headers: {
-					authorization: `bearer ${localStorage.getItem("accessToken")}`,
-				},
-			});
-			const data = await res.json();
-			return data;
-        },
-	});
-	if (isLoading) {
-		return <Loading></Loading>
-	}
-    console.log(bookings);
+	// const url = `${process.env.REACT_APP_API_URL}/bookings?email=${user?.email}`;
+	// const { data: bookings = [], isLoading } = useQuery({
+	// 	queryKey: ["bookings", user?.email],
+	// 	queryFn: async () => {
+	// 		const res = await fetch(url, {
+	// 			headers: {
+	// 				authorization: `bearer ${localStorage.getItem("accessToken")}`,
+	// 			},
+	// 		});
+	// 		const data = await res.json();
+	// 		return data;
+    //     },
+	// });
+	// if (isLoading) {
+	// 	return <Loading></Loading>
+	// }
+
+
+const {user} = useContext(AuthContext);
+  const [bookings, setOrders] = useState([])
+  
+  
+  useEffect(()=>{
+  if(user?.email){
+      fetch(`http://localhost:8000/bookings?email=${user?.email}`,{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('accessToken')}`
+        }
+      })
+      .then(res=>res.json())
+      .then(data=>setOrders(data))
+  }
+  }, [user?.email])
+
 	return (
 		<div>
 			<h3 className="text-3xl mb-5">My Booking</h3>
