@@ -2,8 +2,10 @@
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import moment from "moment";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 const ProductCard = ({ product, setModal,  }) => {
 	const {
+		_id,
 		name,
 		description,
 		email,
@@ -17,14 +19,12 @@ const ProductCard = ({ product, setModal,  }) => {
 		date,
 	} = product;
 
-	console.log(name);
+	console.log(_id);
 
 
 		const [loadUserData, setLoadUserData] = useState([]);
 		const [userData, setUserData] = useState({});
 		useEffect(() => {
-			// axios.get(`${process.env.REACT_APP_API_URL}/users`)
-			// 	.then((data) => setLoadUserData(data));
 			fetch(`${process.env.REACT_APP_API_URL}/users`)
 				.then(res => res.json())
 			.then(data => setLoadUserData(data))
@@ -34,6 +34,23 @@ const ProductCard = ({ product, setModal,  }) => {
 		const data = (loadUserData.find(e => e.email === email) )
 		setUserData(data);
 	}, [email, loadUserData])
+
+	const handleReport = (id) => {
+		console.log(id);
+		fetch(`${process.env.REACT_APP_API_URL}/users/report/${id}`, {
+			method: "PUT",
+			headers: {
+				authorization: `bearer ${localStorage.getItem("accessToken")}`,
+			},
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.modifiedCount > 0) {
+					toast.success("Make verified successful.");
+					
+				}
+			});
+	};
 
 	return (
 		<div className="card w-full h-[500px] y bg-base-100 shadow-xl">
@@ -65,12 +82,13 @@ const ProductCard = ({ product, setModal,  }) => {
 				</div>
 
 				<div className="card-actions">
-					<label
+					<button
 						onClick={() => setModal(product)}
 						className="btn btn-primary"
 						htmlFor="booking-modal">
 						Book Now
-					</label>
+					</button>
+					<button onClick={() => handleReport(_id)}>Report</button>
 				</div>
 			</div>
 		</div>
