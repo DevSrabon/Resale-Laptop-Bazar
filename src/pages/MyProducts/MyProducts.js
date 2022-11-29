@@ -25,7 +25,7 @@ const MyProducts = () => {
 					My Products
 				</h4>
 
-				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4 mb-5">
+				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
 					{products.map((product) => (
                         <MyProductCard key={product._id} isLoading={isLoading} refetch={refetch}  product={product}/>
 					))}

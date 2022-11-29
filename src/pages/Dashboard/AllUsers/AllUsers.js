@@ -45,7 +45,7 @@ const AllUsers = () => {
 	
 	const handleMakeVerified = (id) => {
 		console.log(id)
-		fetch(`${process.env.REACT_APP_API_URL}/users/admin/${id}`, {
+		fetch(`${process.env.REACT_APP_API_URL}/users/verified/${id}`, {
 			method: "PUT",
 			headers: {
 				authorization: `bearer ${localStorage.getItem("accessToken")}`,
