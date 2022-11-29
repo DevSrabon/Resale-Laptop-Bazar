@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider";
 import Loading from "../../Shared/Loading/Loading";
 
 const AddProduct = () => {
@@ -13,7 +14,6 @@ const AddProduct = () => {
 	} = useForm();
 
 	const imageHostKey = process.env.REACT_APP_imgbb_key;
-
 	const navigate = useNavigate();
 
 	const date = new Date();
@@ -30,6 +30,9 @@ const AddProduct = () => {
 		},
 	});
 
+
+const {user} = useContext(AuthContext)
+
 	const handleAddProduct = (data) => {
 		const image = data.img[0];
 		console.log(image);
@@ -43,11 +46,13 @@ const AddProduct = () => {
 			.then((res) => res.json())
 			.then((imgData) => {
 				if (imgData.success) {
-					console.log(imgData.data.url);
-					const doctor = {
+					const product = {
+						email: user.email,
+						name: user.displayName,
 						model: data.model,
 						location: data.location,
 						used: data.used,
+						description: data.description,
 						resellPrice: data.resellPrice,
 						originalPrice: data.originalPrice,
 						brand: data.brand,
@@ -59,15 +64,15 @@ const AddProduct = () => {
 						method: "POST",
 						headers: {
 							"content-type": "application/json",
-							// authorization: `bearer ${localStorage.getItem("accessToken")}`,
+							authorization: `bearer ${localStorage.getItem("accessToken")}`,
 						},
-						body: JSON.stringify(doctor),
+						body: JSON.stringify(product),
 					})
 						.then((res) => res.json())
 						.then((result) => {
 							console.log(result);
 							toast.success(`${data.brand} is added successfully`);
-							navigate("/");
+							navigate('/');
 						});
 				}
 			});
@@ -165,7 +170,7 @@ const AddProduct = () => {
 					<textarea
 						className="input input-bordered w-full max-w-xs"
 						type="text"
-						{...register("used", {
+						{...register("description", {
 							required: "Year of used is required",
 						})}
 					/>

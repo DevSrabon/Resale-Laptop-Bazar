@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Category from './Category';
-
+import Loading from '../../Shared/Loading/Loading'
 const Categories = () => {
-    const { data: homes =[] } = useQuery({
+    const { data: homes =[], isLoading } = useQuery({
 			queryKey: ["homes"],
 			queryFn: async () => {
 				const res = fetch(`${process.env.REACT_APP_API_URL}/homes`);
@@ -13,6 +13,9 @@ const Categories = () => {
 			},
     });
 
+	if (isLoading) {
+		return <Loading></Loading>
+	}
     
     return (
 			<div>
