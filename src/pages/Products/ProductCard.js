@@ -43,6 +43,14 @@ const ProductCard = ({ product, setModal,  }) => {
 			<div className="card-body items-start text-slate-500">
 				<h2 className="card-title">Brand: {brand}</h2>
 				<div className="font-medium">
+					<p className="flex items-center gap-2 mb-3 font-bold">
+						{name}
+						{userData?.isVerified && (
+							<span className="text-blue-600 ">
+								<MdOutlineVerifiedUser />
+							</span>
+						)}
+					</p>
 					<p className="text-lg font-semibold"> Model: {model}</p>
 					<p> Year of purchase: {purchase} years</p>
 					<div className="flex gap-4">
@@ -55,14 +63,6 @@ const ProductCard = ({ product, setModal,  }) => {
 						{moment.utc(date).local().startOf("seconds").fromNow()}
 					</p>
 				</div>
-				<p className="flex items-center gap-1 font-bold">
-					{name}
-					{userData?.isVerified && (
-						<span className="text-blue-600 ">
-							<MdOutlineVerifiedUser />
-						</span>
-					)}
-				</p>
 
 				<div className="card-actions">
 					<label

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-// import React, { useContext } from "react";
+
 import toast from "react-hot-toast";
-// import { AuthContext } from "../../../contexts/AuthProvider";
+
 import Loading from '../../Shared/Loading/Loading'
 import { getAuth, deleteUser } from "firebase/auth";
 
@@ -12,7 +12,7 @@ const AllUsers = () => {
 	const { data: users = [], refetch, isLoading } = useQuery({
 		queryKey: ["users"],
 		queryFn: async () => {
-			const res = await fetch(`${process.env.REACT_APP_API_URL}/users`);
+			const res = await fetch(`${process.env.REACT_APP_API_URL}/users`,);
 			const data = await res.json();
 			return data;
 		},
@@ -45,7 +45,7 @@ const AllUsers = () => {
 	
 	const handleMakeVerified = (id) => {
 		console.log(id)
-		fetch(`${process.env.REACT_APP_API_URL}/users/verified/${id}`, {
+		fetch(`${process.env.REACT_APP_API_URL}/users/admin/${id}`, {
 			method: "PUT",
 			headers: {
 				authorization: `bearer ${localStorage.getItem("accessToken")}`,

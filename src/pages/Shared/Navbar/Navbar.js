@@ -1,16 +1,24 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loading from '../Loading/Loading'
+import useSeller from '../../../hooks/useSeller';
 
 const Navbar = () => {
+	const [isOpen, setIsOpen] = useState(false);
 	const { user, logOut } = useContext(AuthContext);
+	const { isSeller } = useSeller(user?.email);
 
+	
+// 	if (isSeller) {
+// 	return <></>
+// }
 	const handleLogOut = () => {
 		logOut()
-			.then(() => {})
-			.catch((err) => console.log(err));
+			.then(() => {
+		})
+		.catch((err) => console.log(err));
 	};
-	const [isOpen, setIsOpen] = useState(false);
     const menuItems = (
 			<React.Fragment>
 				<li>
@@ -18,12 +26,19 @@ const Navbar = () => {
 				</li>
 				<li>
 					<Link to="/faq">FAQ</Link>
-				</li>
-				{user?.uid ? (
-					<>
+			</li>
+			{/* <>
+				
+					{ isSeller &&
+					
 						<li>
 							<Link to="/myproduct">My Product</Link>
-						</li>
+					</li>
+					} 
+				
+			</> */}
+				{user?.uid ? (
+					<>
 						<li>
 							<Link to="/dashboard">Dashboard</Link>
 						</li>
