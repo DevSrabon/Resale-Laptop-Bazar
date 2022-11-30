@@ -17,7 +17,6 @@ const AllUsers = () => {
 			return data;
 		},
     });
-    console.log(users)
     const handleDeleteUser = (user) => {
 
 			fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}`, {
@@ -30,7 +29,7 @@ const AllUsers = () => {
                 .then((data) => {
                     if (data.deletedCount > 0) {
                         deleteUser(removeUser)
-                                                    .then(() => {
+ 									 .then(() => {
                                                        toast.success('Deleted from firebase')
                                                     })
                                                     .catch((error) => {
@@ -85,7 +84,7 @@ const AllUsers = () => {
 									<td>{user.email}</td>
 									<td>{user.role}</td>
 									<td>
-										{user?.isVerified !== "verified" ? (
+										{user?.role==='Seller' || user?.isVerified !== "verified" ? (
 											<button
 												onClick={() => handleMakeVerified(user._id)}
 												className="btn btn-xs btn-primary">
@@ -95,6 +94,7 @@ const AllUsers = () => {
 											<p>Verified</p>
 										)}
 									</td>
+								 
 									<td>
 										<button
 											onClick={() => handleDeleteUser(user)}

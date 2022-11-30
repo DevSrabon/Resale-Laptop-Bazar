@@ -23,7 +23,7 @@ const Products = () => {
 					/>
 
 				))}
-				console.log(product)
+				
 				
 				
 				</div>

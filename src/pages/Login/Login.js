@@ -45,10 +45,25 @@ const Login = () => {
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
+				savedUser(user.displayName, user.email, 'Buyer')
 				toast.success("Login Success");
 				navigate(from, { replace: true });
 			})
 			.catch();
+	};
+	const savedUser = (name, email, role) => {
+		const user = { name, email, role };
+		fetch(`${process.env.REACT_APP_API_URL}/users`, {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(user),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setLoginUserEmail(email);
+			});
 	};
 
 	return (

@@ -1,9 +1,13 @@
 
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import useBuyer from "../../hooks/useBuyer";
+import { AuthContext } from "../../contexts/AuthProvider";
+import useSeller from "../../hooks/useSeller";
 const ProductCard = ({ product, setModal,  }) => {
+	const { user } = useContext(AuthContext);
 	const {
 		_id,
 		name,
@@ -11,6 +15,7 @@ const ProductCard = ({ product, setModal,  }) => {
 		email,
 		image,
 		brand,
+		report,
 		originalPrice,
 		resellPrice,
 		purchase,
@@ -19,8 +24,8 @@ const ProductCard = ({ product, setModal,  }) => {
 		date,
 	} = product;
 
-	console.log(_id);
-
+	const [isBuyer] = useBuyer(user?.email)
+const [isSeller]= useSeller(user?.email)
 
 		const [loadUserData, setLoadUserData] = useState([]);
 		const [userData, setUserData] = useState({});
@@ -36,7 +41,6 @@ const ProductCard = ({ product, setModal,  }) => {
 	}, [email, loadUserData])
 
 	const handleReport = (id) => {
-		console.log(id);
 		fetch(`${process.env.REACT_APP_API_URL}/users/report/${id}`, {
 			method: "PUT",
 			headers: {
@@ -45,6 +49,7 @@ const ProductCard = ({ product, setModal,  }) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				console.log(data)
 				if (data.modifiedCount > 0) {
 					toast.success("Make verified successful.");
 					
@@ -60,10 +65,10 @@ const ProductCard = ({ product, setModal,  }) => {
 			<div className="card-body items-start text-slate-500">
 				<h2 className="card-title">Brand: {brand}</h2>
 				<div className="font-medium">
-					<p className="flex items-center gap-2 mb-3 font-bold">
+					<p className="flex items-center gap-1 mb-3 font-bold">
 						{name}
 						{userData?.isVerified && (
-							<span className="text-blue-600 ">
+							<span className="text-blue-900 ">
 								<MdOutlineVerifiedUser />
 							</span>
 						)}
@@ -81,14 +86,20 @@ const ProductCard = ({ product, setModal,  }) => {
 					</p>
 				</div>
 
-				<div className="card-actions">
-					<button
+				<div className="card-actions items-center gap-16">
+					<label
 						onClick={() => setModal(product)}
 						className="btn btn-primary"
 						htmlFor="booking-modal">
 						Book Now
-					</button>
-					<button onClick={() => handleReport(_id)}>Report</button>
+					</label>
+					{isBuyer || !report || !isSeller &&
+						<button
+							className="btn btn-primary"
+							onClick={() => handleReport(_id)}>
+							Report
+						</button>
+					}
 				</div>
 			</div>
 		</div>

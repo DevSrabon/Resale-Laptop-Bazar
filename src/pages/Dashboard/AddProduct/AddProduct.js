@@ -17,7 +17,6 @@ const AddProduct = () => {
 	const navigate = useNavigate();
 
 	const date = new Date();
-	console.log(date);
 
 	const { data: categories, isLoading } = useQuery({
 		queryKey: ["categories"],

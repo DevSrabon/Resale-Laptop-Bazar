@@ -6,6 +6,7 @@ import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import ReportedItems from "../pages/Dashboard/ReportedItems/ReportedItems";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import MyProducts from "../pages/MyProducts/MyProducts";
@@ -83,8 +84,20 @@ export const router = createBrowserRouter([
 				),
 			},
 			{
+				path: "/dashboard/reports",
+				element: (
+					<AdminRoute>
+						<ReportedItems />
+					</AdminRoute>
+				),
+			},
+			{
 				path: "/dashboard/payment/:id",
-				element: <Payment></Payment>,
+				element: (
+					<PrivateRoute>
+						<Payment></Payment>
+					</PrivateRoute>
+				),
 				loader: ({ params }) =>
 					fetch(`${process.env.REACT_APP_API_URL}/bookings/${params.id}`),
 			},
