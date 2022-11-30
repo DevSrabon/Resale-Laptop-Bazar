@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useToken from "../../hooks/useToken";
+import { BiUserCircle } from "react-icons/bi";
 const Login = () => {
 	const {
 		register,
@@ -69,7 +70,10 @@ const Login = () => {
 	return (
 		<div className="h-[800px] flex justify-center items-center ">
 			<div className="w-96 p-7 shadow-2xl">
-				<h2 className="text-xl text-center">Login</h2>
+				<span className="flex justify-center">
+					<BiUserCircle className="text-8xl text-slate-400" />
+				</span>
+				<h2 className="text-xl font-bold text-center text-slate-400">Login</h2>
 				<form onSubmit={handleSubmit(handleLogin)}>
 					<div className="form-control w-full max-w-xs">
 						<label className="label">
@@ -109,7 +113,7 @@ const Login = () => {
 						</label>
 					</div>
 					<input
-						className="btn btn-accent w-full"
+						className="btn btn-active hover:btn-outline w-full"
 						value="Login"
 						type="submit"
 					/>

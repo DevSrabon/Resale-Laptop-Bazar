@@ -1,18 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import Loading from '../Loading/Loading'
-import useSeller from '../../../hooks/useSeller';
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { user, logOut } = useContext(AuthContext);
-	const { isSeller } = useSeller(user?.email);
 
-	
-// 	if (isSeller) {
-// 	return <></>
-// }
 	const handleLogOut = () => {
 		logOut()
 			.then(() => {
@@ -27,16 +20,6 @@ const Navbar = () => {
 				<li>
 					<Link to="/faq">FAQ</Link>
 			</li>
-			{/* <>
-				
-					{ isSeller &&
-					
-						<li>
-							<Link to="/myproduct">My Product</Link>
-					</li>
-					} 
-				
-			</> */}
 				{user?.uid ? (
 					<>
 						<li>
@@ -90,8 +73,8 @@ const Navbar = () => {
 						Laptop Bazar
 					</Link>
 				</div>
-				<div className="navbar-center hidden lg:flex">
-					<ul className="menu menu-horizontal p-0">{menuItems}</ul>
+				<div className="navbar-center hidden  font-bold lg:flex">
+					<ul className="menu menu-horizontal p-0 text-slate-400">{menuItems}</ul>
 				</div>
 				<label
 					htmlFor="dashboard-drawer"

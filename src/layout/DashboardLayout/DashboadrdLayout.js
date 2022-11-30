@@ -15,7 +15,7 @@ const DashboardLayout = () => {
 	return (
 		<div>
 			<Navbar></Navbar>
-			<div className="drawer  drawer-mobile gap-3">
+			<div className="drawer drawer-mobile gap-3">
 				<input
 					id="dashboard-drawer"
 					type="checkbox"
@@ -24,9 +24,9 @@ const DashboardLayout = () => {
 				<div className="drawer-content">
 					<Outlet></Outlet>
 				</div>
-				<div className="drawer-side bg-slate-400 rounded-lg mb-3">
+				<div className="drawer-side w-[190px] bg-base-100 rounded-t-lg">
 					<label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-					<ul className="menu p-4 w-80  text-white">
+					<ul className="menu p-4 w-30  text-gray-900 font-bold">
 						<>
 							{isBuyer && (
 								<li>
@@ -56,7 +56,7 @@ const DashboardLayout = () => {
 										<Link to="/dashboard/allusers">All Users</Link>
 									</li>
 									<li>
-										<Link to="/dashboard/reports">Reports</Link>
+										<Link to="/dashboard/reports">Reported Items</Link>
 									</li>
 								</>
 							)}

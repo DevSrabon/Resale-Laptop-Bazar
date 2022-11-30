@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider';
 import MyProductCard from './MyProductCard';
 
@@ -19,6 +20,22 @@ const MyProducts = () => {
 						return data;
 					},
 				});
+	 const handleAdvertise = (_id) => {
+			fetch(`http://localhost:8000/advertise/${_id}`, {
+				method: "PUT",
+				headers: {
+					authorization: `bearer ${localStorage.getItem("accessToken")}`,
+				},
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(data);
+					if (data.acknowledged > 0) {
+						toast.success("advertise added Successfully");
+						refetch();
+					}
+				});
+		};
     return (
 			<div>
 				<h4 className="text-3xl text-center font-bold text-slate-400 my-5">
@@ -27,7 +44,13 @@ const MyProducts = () => {
 
 				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
 					{products.map((product) => (
-                        <MyProductCard key={product._id} isLoading={isLoading} refetch={refetch}  product={product}/>
+						<MyProductCard
+							key={product._id}
+							isLoading={isLoading}
+							refetch={refetch}
+							handleAdvertise={handleAdvertise}
+							product={product}
+						/>
 					))}
 				</div>
 			</div>

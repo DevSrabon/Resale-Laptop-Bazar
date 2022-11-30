@@ -63,7 +63,7 @@ const AllUsers = () => {
     }
     return (
 			<div className="my-5">
-				<h2 className="text-3xl">Manage Users: {users?.length}</h2>
+				<h2 className="text-2xl font-semibold text-emerald-600">Manage All Users: {users?.length}</h2>
 				<div className="overflow-x-auto mt-5">
 					<table className="table w-full">
 						<thead>
@@ -84,7 +84,7 @@ const AllUsers = () => {
 									<td>{user.email}</td>
 									<td>{user.role}</td>
 									<td>
-										{user?.role==='Seller' || user?.isVerified !== "verified" ? (
+										{user?.isVerified !== "verified" ? (
 											<button
 												onClick={() => handleMakeVerified(user._id)}
 												className="btn btn-xs btn-primary">

@@ -3,16 +3,10 @@ import React from 'react';
 const Category = ({ home }) => {
     const { brand, img } = home;
     return (
-			<div className="card w-full p-5 bg-base-100 shadow-2xl">
+			<div className="card w-full h-40 p-3 bg-base-100 shadow-2xl">
 				<figure>
-					<img className='w-full h-60' src={img} alt="Shoes" />
+					<img className='w-full h-full' src={img} alt={brand} />
 				</figure>
-				<div className="card-body">
-					<h2 className="card-title">
-						{brand}
-                </h2>
-                
-				</div>
 			</div>
 		);
 };

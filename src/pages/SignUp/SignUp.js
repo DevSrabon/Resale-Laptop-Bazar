@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { BiUserCircle } from "react-icons/bi";
 import { Link, useNavigate} from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useToken from "../../hooks/useToken";
@@ -62,7 +63,10 @@ const SignUp = () => {
 	return (
 		<div className="h-[800px] flex justify-center items-center ">
 			<div className="w-96 p-7 shadow-2xl">
-				<h2 className="text-xl text-center">Signup</h2>
+				<span className="flex justify-center">
+					<BiUserCircle className="text-8xl text-slate-400" />
+				</span>
+				<h2 className="text-xl font-bold text-center text-slate-400">Sign Up</h2>
 				<form onSubmit={handleSubmit(handleSignUp)}>
 					<div className="form-control w-full max-w-xs">
 						<label className="label">
@@ -127,7 +131,7 @@ const SignUp = () => {
 						</select>
 					</div>
 					<input
-						className="btn btn-accent w-full mt-3"
+						className="btn btn-active hover:btn-outline w-full mt-3"
 						value="Login"
 						type="submit"
 					/>
@@ -135,7 +139,7 @@ const SignUp = () => {
 				</form>
 				<p className="mt-3 text-center">
 					Already have an account?{" "}
-					<Link className="text-secondary" to="/login">
+					<Link className="text-secondary " to="/login">
 						Please login
 					</Link>
 				</p>

@@ -9,6 +9,7 @@ import Loading from "../../Shared/Loading/Loading";
 const AddProduct = () => {
 	const {
 		register,
+		reset,
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
@@ -71,7 +72,7 @@ const {user} = useContext(AuthContext)
 						.then((result) => {
 							console.log(result);
 							toast.success(`${data.brand} is added successfully`);
-							navigate('/');
+							reset()
 						});
 				}
 			});

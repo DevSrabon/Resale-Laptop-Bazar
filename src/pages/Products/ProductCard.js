@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useBuyer from "../../hooks/useBuyer";
 import { AuthContext } from "../../contexts/AuthProvider";
-import useSeller from "../../hooks/useSeller";
 const ProductCard = ({ product, setModal,  }) => {
 	const { user } = useContext(AuthContext);
 	const {
@@ -25,7 +24,6 @@ const ProductCard = ({ product, setModal,  }) => {
 	} = product;
 
 	const [isBuyer] = useBuyer(user?.email)
-const [isSeller]= useSeller(user?.email)
 
 		const [loadUserData, setLoadUserData] = useState([]);
 		const [userData, setUserData] = useState({});
@@ -87,19 +85,21 @@ const [isSeller]= useSeller(user?.email)
 				</div>
 
 				<div className="card-actions items-center gap-16">
-					<label
-						onClick={() => setModal(product)}
-						className="btn btn-primary"
-						htmlFor="booking-modal">
-						Book Now
-					</label>
-					{isBuyer || !report || !isSeller &&
+					{ isBuyer &&
+						<label
+							onClick={() => setModal(product)}
+							className="btn btn-primary"
+							htmlFor="booking-modal">
+							Book Now
+						</label>
+					}
+					{isBuyer && !report && (
 						<button
 							className="btn btn-primary"
 							onClick={() => handleReport(_id)}>
 							Report
 						</button>
-					}
+					)}
 				</div>
 			</div>
 		</div>
