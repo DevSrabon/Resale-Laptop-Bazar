@@ -7,6 +7,7 @@ import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import ReportedItems from "../pages/Dashboard/ReportedItems/ReportedItems";
+import FAQ from "../pages/FAQ/FAQ";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import MyProducts from "../pages/MyProducts/MyProducts";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
 			{
 				path: "/signup",
 				element: <SignUp />,
+			},
+			{
+				path: "/faq",
+				element: <FAQ />,
 			},
 
 			{
@@ -103,6 +108,7 @@ export const router = createBrowserRouter([
 			},
 		],
 	},
+
 	{
 		path: "*",
 		element: <Page404 />,
