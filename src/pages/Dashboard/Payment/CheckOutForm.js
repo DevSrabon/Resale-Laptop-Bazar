@@ -75,23 +75,22 @@ const CheckoutForm = ({booking}) => {
                    bookingId: _id
             }
   
-            fetch('http://localhost:8000/payments', {
-              method: 'POST',
-              headers: {
-                'content-type': 'application/json',
-                authorization:` bearer ${localStorage.getItem('accessToken')}`
-              },
-              body: JSON.stringify(payments)
-              
-            })
-            .then(res=>res.json())
-            .then(data=>{
-              console.log(data)
-              if(data.insertedId){
-                setSuccess('Congrates ! Your payment successfully');
-                setTransactionId(paymentIntent.id);
-              }
-            })
+            fetch(`${process.env.REACT_APP_API_URL}/payments`, {
+							method: "POST",
+							headers: {
+								"content-type": "application/json",
+								authorization: ` bearer ${localStorage.getItem("accessToken")}`,
+							},
+							body: JSON.stringify(payments),
+						})
+							.then((res) => res.json())
+							.then((data) => {
+								console.log(data);
+								if (data.insertedId) {
+									setSuccess("Congrates ! Your payment successfully");
+									setTransactionId(paymentIntent.id);
+								}
+							});
           }
           setProcessing(false)
     }

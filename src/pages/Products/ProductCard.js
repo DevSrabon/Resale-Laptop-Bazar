@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useBuyer from "../../hooks/useBuyer";
 import { AuthContext } from "../../contexts/AuthProvider";
+import axios from "axios";
 const ProductCard = ({ product, setModal,  }) => {
 	const { user } = useContext(AuthContext);
 	const {
@@ -28,10 +29,12 @@ const ProductCard = ({ product, setModal,  }) => {
 		const [loadUserData, setLoadUserData] = useState([]);
 	const [userData, setUserData] = useState({});
 	const [refetch, setRefetch] = useState(true)
-		useEffect(() => {
-			fetch(`${process.env.REACT_APP_API_URL}/users`)
-				.then(res => res.json())
-			.then(data => setLoadUserData(data))
+	useEffect(() => {
+		axios.get(`${process.env.REACT_APP_API_URL}/users`)
+			.then(res => setLoadUserData(res.data));
+			// fetch(`${process.env.REACT_APP_API_URL}/users`)
+			// 	.then(res => res.json())
+			// .then(data => setLoadUserData(data))
 		}, [refetch]);
 	
 	useEffect(() => {
@@ -50,8 +53,8 @@ const ProductCard = ({ product, setModal,  }) => {
 			.then((data) => {
 				console.log(data)
 				if (data.matchedCount > 0) {
-					setRefetch(report);
-					toast.success("Make verified successful.");
+					setRefetch(!report);
+					toast.success("Reported successful.");
 				}
 			});
 	};

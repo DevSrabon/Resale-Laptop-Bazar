@@ -9,17 +9,17 @@ const ReportedItems = () => {
     const [loading, setLoading] = useState(true)
     const [refetch, setRefetch] = useState(true)
     useEffect(() => {
-            fetch(`http://localhost:8000/reports?report=reported`, {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                },
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    setLoading(false)
-                    setReportUser(data)
-                    console.log(data);
-                });
+            fetch(`${process.env.REACT_APP_API_URL}/reports?report=reported`, {
+							headers: {
+								authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+							},
+						})
+							.then((res) => res.json())
+							.then((data) => {
+								setLoading(false);
+								setReportUser(data);
+								console.log(data);
+							});
 	
     }, [refetch]);
 			

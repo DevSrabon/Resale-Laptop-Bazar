@@ -21,7 +21,7 @@ const MyProducts = () => {
 					},
 				});
 	 const handleAdvertise = (_id) => {
-			fetch(`http://localhost:8000/advertise/${_id}`, {
+			fetch(`${process.env.REACT_APP_API_URL}/advertise/${_id}`, {
 				method: "PUT",
 				headers: {
 					authorization: `bearer ${localStorage.getItem("accessToken")}`,

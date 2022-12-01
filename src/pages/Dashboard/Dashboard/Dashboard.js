@@ -13,13 +13,13 @@ const Dashboard = () => {
     
   useEffect(()=>{
   if(user?.email){
-      fetch(`http://localhost:8000/bookings?email=${user?.email}`,{
-        headers:{
-          authorization:`Bearer ${localStorage.getItem('accessToken')}`
-        }
-      })
-      .then(res=>res.json())
-      .then(data=>setBookings(data))
+      fetch(`${process.env.REACT_APP_API_URL}/bookings?email=${user?.email}`, {
+				headers: {
+					authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+				},
+			})
+				.then((res) => res.json())
+				.then((data) => setBookings(data));
   }
   }, [user?.email])
 
