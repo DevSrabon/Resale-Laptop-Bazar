@@ -127,7 +127,7 @@ const Login = () => {
 						Create new account
 					</Link>
 				</p>
-				<div className="divider">OR</div>
+				<div className="divider text-stone-400">OR</div>
 				<button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
 					CONTINUE WITH GOOGLE
 				</button>

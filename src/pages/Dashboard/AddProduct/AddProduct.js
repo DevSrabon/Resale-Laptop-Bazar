@@ -82,7 +82,10 @@ const {user} = useContext(AuthContext)
 	}
 	return (
 		<div className="w-96 mx-auto p-7 my-10 shadow-2xl rounded-lg">
-			<h3 className="text-3xl"> Sell A Laptop</h3>
+			<h3 className="text-3xl text-center font-semibold text-slate-400">
+				{" "}
+				Sell A Laptop
+			</h3>
 			<form onSubmit={handleSubmit(handleAddProduct)}>
 				<div className="form-control w-full max-w-xs">
 					<label className="label">
@@ -225,7 +228,7 @@ const {user} = useContext(AuthContext)
 					{errors.img && <p className="text-red-600">{errors.img?.message}</p>}
 				</div>
 				<input
-					className="btn btn-accent w-full mt-3"
+					className="btn  btn-active hover:btn-outline w-full mt-3"
 					value="Add Product"
 					type="submit"
 				/>

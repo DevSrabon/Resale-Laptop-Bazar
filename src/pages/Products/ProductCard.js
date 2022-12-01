@@ -26,12 +26,13 @@ const ProductCard = ({ product, setModal,  }) => {
 	const [isBuyer] = useBuyer(user?.email)
 
 		const [loadUserData, setLoadUserData] = useState([]);
-		const [userData, setUserData] = useState({});
+	const [userData, setUserData] = useState({});
+	const [refetch, setRefetch] = useState(true)
 		useEffect(() => {
 			fetch(`${process.env.REACT_APP_API_URL}/users`)
 				.then(res => res.json())
 			.then(data => setLoadUserData(data))
-		}, []);
+		}, [refetch]);
 	
 	useEffect(() => {
 		const data = (loadUserData.find(e => e.email === email) )
@@ -48,9 +49,9 @@ const ProductCard = ({ product, setModal,  }) => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data)
-				if (data.modifiedCount > 0) {
+				if (data.matchedCount > 0) {
+					setRefetch(report);
 					toast.success("Make verified successful.");
-					
 				}
 			});
 	};

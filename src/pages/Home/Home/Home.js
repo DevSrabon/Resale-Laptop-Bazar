@@ -5,14 +5,18 @@ import Carousel from '../Carousel/Carousel';
 import Categories from '../Categories/Categories';
 
 const Home = () => {
+
     return (
         <>
-            {/* <Banner /> */}
-            <Carousel />
-            <Advertises/>
-            <Categories />
-            <AboutUs/>
-        </>
+<Carousel />
+<Advertises/>
+<Categories />
+<AboutUs/>
+
+</>
+            
+
+       
     );
 };
 

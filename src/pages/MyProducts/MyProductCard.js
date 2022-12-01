@@ -13,8 +13,10 @@ const MyProductCard = ({ product, isLoading, refetch, handleAdvertise }) => {
 		model,
 		date,
 		description,
+		advertise,
 		_id,
 	} = product;
+	console.log(advertise);
 
 	const handleDelete = (user) => {
 		fetch(`${process.env.REACT_APP_API_URL}/product/${user}`, {
@@ -37,41 +39,46 @@ const MyProductCard = ({ product, isLoading, refetch, handleAdvertise }) => {
 		return <Loading></Loading>;
 	}
 	return (
-		<div className="card w-full h-[500px] y bg-base-100 shadow-xl">
-			<figure className="px-10 mt-5">
-				<img src={image} alt="Shoes" className="rounded-lg" />
-			</figure>
-			<div className="card-body items-start text-slate-500">
-				<h2 className="card-title">Brand: {brand}</h2>
-				<div className="font-medium">
-					<p className="text-lg font-semibold"> Model: {model}</p>
-					<p> Year of purchase: {purchase} years</p>
-					<div className="flex gap-4">
-						<p> Original Price: ${originalPrice}</p>
-						<p> Resale Price: ${resellPrice}</p>
+		<>
+			{!advertise && (
+				<div className="card w-full h-[500px] y bg-base-100 shadow-xl">
+					<figure className="px-10 mt-5">
+						<img src={image} alt="Shoes" className="rounded-lg" />
+					</figure>
+					<div className="card-body items-start text-slate-500">
+						<h2 className="card-title">Brand: {brand}</h2>
+						<div className="font-medium">
+							<p className="text-lg font-semibold"> Model: {model}</p>
+							<p> Year of purchase: {purchase} years</p>
+							<div className="flex gap-4">
+								<p> Original Price: ${originalPrice}</p>
+								<p> Resale Price: ${resellPrice}</p>
+							</div>
+							<p>Description : {description}</p>
+							<p>Location: {location}</p>
+							<p className="mt-2">
+								{moment.utc(date).local().startOf("seconds").fromNow()}
+							</p>
+						</div>
+
+						<div className="card-actions items-center gap-16">
+							<button
+								onClick={() => handleAdvertise(_id)}
+								className="btn btn-primary btn-sm
+							">
+								Advertise Now
+							</button>
+
+							<button
+								onClick={() => handleDelete(_id)}
+								className="btn btn-primary btn-sm">
+								Delete
+							</button>
+						</div>
 					</div>
-					<p>Description : {description}</p>
-					<p>Location: {location}</p>
-					<p className="mt-2">
-						{moment.utc(date).local().startOf("seconds").fromNow()}
-					</p>
 				</div>
-
-				<div className="card-actions items-center gap-16">
-											<button
-							onClick={() => handleAdvertise(
-							_id)} className="btn btn-primary btn-sm
-							">Advertise Now</button>
-
-						<button
-							onClick={() => handleDelete(_id)}
-							className="btn btn-primary btn-sm">
-							Delete
-						</button>
-				</div>
-			</div>
-		</div>
-
+			)}
+		</>
 	);
 };
 
