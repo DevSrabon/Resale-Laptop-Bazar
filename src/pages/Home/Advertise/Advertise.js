@@ -18,7 +18,7 @@ const Advertise = ({ advertise }) => {
 	return (
 		<div className="card w-96 bg-base-100 shadow-xl image-full">
 			<figure>
-				<img src={image} alt="Shoes" className="rounded-lg" />
+				<img src={image} alt="Shoes" className="rounded-lg w-full" />
 			</figure>
 			<div className="card-body gap-10 items-start text-slate-500">
 				<h2 className="card-title">Brand: {brand}</h2>

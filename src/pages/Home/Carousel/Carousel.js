@@ -10,7 +10,6 @@ import "swiper/css/scrollbar";
 const Carousel = () => {
     return (
 			<Swiper
-
 				modules={[Navigation, Pagination, Scrollbar, A11y]}
 				spaceBetween={50}
 				slidesPerView={2}
@@ -21,73 +20,27 @@ const Carousel = () => {
 				onSlideChange={() => console.log("slide change")}>
 				<SwiperSlide>
 					<img
-						className="lg:h-[50vh] rounded-lg"
+						className="lg:h-[50vh] sm:h-[30vh] rounded-lg"
 						src="https://computerzone.com.bd/wp-content/uploads/2022/11/slider-11-27-2022-b.jpg"
 						alt=""
 					/>
 				</SwiperSlide>
 				<SwiperSlide>
 					<img
-						className="lg:h-[50vh] rounded-lg"
+						className="lg:h-[50vh] sm:h-[30vh] rounded-lg"
 						src="https://computerzone.com.bd/wp-content/uploads/2022/11/slider-11-27-2022-a-1.jpg"
 						alt=""
 					/>
 				</SwiperSlide>
 				<SwiperSlide>
 					<img
-						className="lg:h-[50vh] rounded-lg"
+						className="lg:h-[50vh] sm:h-[30vh] rounded-lg"
 						src="https://computerzone.com.bd/wp-content/uploads/2022/11/slider-11-27-2022-e.jpg"
 						alt=""
 					/>
 				</SwiperSlide>
 				...
 			</Swiper>
-			// <div className="carousel w-full">
-			// 	<div id="slide1" className="carousel-item relative w-full">
-			// 		<img
-			// 			src="https://computerzone.com.bd/wp-content/uploads/2022/11/slider-11-27-2022-b.jpg"
-			// 			className="w-full"
-			// 			alt=""
-			// 		/>
-			// 		<div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-			// 			<a href="#slide3" className="btn btn-circle">
-			// 				❮
-			// 			</a>
-			// 			<a href="#slide2" className="btn btn-circle">
-			// 				❯
-			// 			</a>
-			// 		</div>
-			// 	</div>
-			// 	<div id="slide2" className="carousel-item relative w-full">
-			// 		<img
-			// 			src="https://computerzone.com.bd/wp-content/uploads/2022/11/slider-11-27-2022-a-1.jpg"
-			// 			className="w-full"
-			// 			alt=""
-			// 		/>
-			// 		<div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-			// 			<a href="#slide1" className="btn btn-circle">
-			// 				❮
-			// 			</a>
-			// 			<a href="#slide3" className="btn btn-circle">
-			// 				❯
-			// 			</a>
-			// 		</div>
-			// 	</div>
-			// 	<div id="slide3" className="carousel-item relative w-full">
-			// 		<img
-			// 			src="https://computerzone.com.bd/wp-content/uploads/2022/11/slider-11-27-2022-e.jpg"
-			// 			className="w-full" alt=''
-			// 		/>
-			// 		<div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-			// 			<a href="#slide2" className="btn btn-circle">
-			// 				❮
-			// 			</a>
-			// 			<a href="#slide1" className="btn btn-circle" alt=''>
-			// 				❯
-			// 			</a>
-			// 		</div>
-			// 	</div>
-			// </div>
 		);
 };
 

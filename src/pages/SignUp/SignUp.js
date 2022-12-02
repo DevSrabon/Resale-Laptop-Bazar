@@ -32,11 +32,13 @@ const SignUp = () => {
 				const userInfo = {
 					displayName: data.name,
 				};
-				updateUser(userInfo)
-					.then(() => {
-                        savedUser(data.name, data.email, data.role);
-					})
-					.catch((err) => console.error(err));
+				setTimeout(() => {
+					updateUser(userInfo)
+						.then(() => {
+							savedUser(data.name, data.email, data.role);
+						})
+						.catch((err) => console.error(err));
+},100)
 			})
 			.catch((err) => {
 				setSignUpError(err.message);

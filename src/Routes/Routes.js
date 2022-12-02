@@ -66,11 +66,19 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: "/dashboard",
-				element: <Dashboard />,
+				element: (
+					<PrivateRoute>
+						<Dashboard />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "/dashboard/myproduct",
-				element: <MyProducts />,
+				element: (
+					<SellerRoute>
+						<MyProducts />
+					</SellerRoute>
+				),
 			},
 			{
 				path: "/dashboard/addproduct",

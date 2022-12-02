@@ -25,7 +25,7 @@ const BookingModal = ({ modal,  setModal }) => {
 			name,
 			price,
 			email,
-            phone,
+			phone,
             model,
 			location,
 		};

@@ -96,9 +96,8 @@ const AllUsers = () => {
 									</td>
 								 
 									<td>
-										<button
+									 <button
 											onClick={() => handleDeleteUser(user)}
-											disabled={isLoading}
 											className="btn btn-sm btn-danger text-white">
 											Delete
 										</button>

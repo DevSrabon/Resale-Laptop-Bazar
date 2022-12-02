@@ -18,6 +18,7 @@ const ProductCard = ({ product, setModal,  }) => {
 		report,
 		originalPrice,
 		resellPrice,
+		condition,
 		purchase,
 		location,
 		model,
@@ -79,6 +80,7 @@ const ProductCard = ({ product, setModal,  }) => {
 						<p> Resale Price: ${resellPrice}</p>
 					</div>
 					<p>Description : {description}</p>
+					<p>Condition : {condition}</p>
 					<p>Location: {location}</p>
 					<p className="mt-2">
 						{moment.utc(date).local().startOf("seconds").fromNow()}

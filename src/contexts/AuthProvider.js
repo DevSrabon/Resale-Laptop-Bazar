@@ -27,13 +27,9 @@ const AuthProvider = ({ children }) => {
 	};
 
 	const updateUser = (userInfo) => {
-		setLoading(true);
 		return updateProfile(auth.currentUser, userInfo);
 	};
-	const RemoveUser = (userDelete) => {
-		setLoading(true);
-		return deleteUser(auth.currentUser, userDelete)
-	}
+
 	const googleLogin = () => {
 		setLoading(true);
 		return signInWithPopup(auth, googleProvider);
@@ -63,7 +59,6 @@ const AuthProvider = ({ children }) => {
 		updateUser,
 		loading,
 		googleLogin,
-		RemoveUser,
 	};
 	return (
 		<AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

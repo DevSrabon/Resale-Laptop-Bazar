@@ -34,7 +34,6 @@ const DashboardLayout = () => {
 								</li>
 							)}
 						</>
-
 						<>
 							{isSeller && (
 								<>

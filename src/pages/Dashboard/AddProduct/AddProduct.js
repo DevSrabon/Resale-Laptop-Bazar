@@ -50,6 +50,7 @@ const {user} = useContext(AuthContext)
 						email: user.email,
 						name: user.displayName,
 						model: data.model,
+						condition: data.condition,
 						location: data.location,
 						purchase: data.purchase,
 						description: data.description,
@@ -193,6 +194,20 @@ const {user} = useContext(AuthContext)
 								{category.brand}
 							</option>
 						))}
+					</select>
+				</div>
+				<div className="form-control w-full max-w-xs">
+					<label className="label">
+						<span className="label-text">Condition</span>
+					</label>
+					<select
+						{...register("condition", {
+							required: "Condition is required",
+						})}
+						className="select input-bordered w-full max-w-xs">
+						<option value="Good">Good</option>
+						<option value="Bad">Bad</option>
+						<option value="Excellent">Excellent</option>
 					</select>
 				</div>
 				<div className="form-control w-full max-w-xs">
