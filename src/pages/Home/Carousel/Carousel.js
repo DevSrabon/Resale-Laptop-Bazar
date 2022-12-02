@@ -21,21 +21,21 @@ const Carousel = () => {
 				onSlideChange={() => console.log("slide change")}>
 				<SwiperSlide>
 					<img
-						className="lg:h-[50vh]"
+						className="lg:h-[50vh] rounded-lg"
 						src="https://computerzone.com.bd/wp-content/uploads/2022/11/slider-11-27-2022-b.jpg"
 						alt=""
 					/>
 				</SwiperSlide>
 				<SwiperSlide>
 					<img
-						className="lg:h-[50vh]"
+						className="lg:h-[50vh] rounded-lg"
 						src="https://computerzone.com.bd/wp-content/uploads/2022/11/slider-11-27-2022-a-1.jpg"
 						alt=""
 					/>
 				</SwiperSlide>
 				<SwiperSlide>
 					<img
-						className="lg:h-[50vh]"
+						className="lg:h-[50vh] rounded-lg"
 						src="https://computerzone.com.bd/wp-content/uploads/2022/11/slider-11-27-2022-e.jpg"
 						alt=""
 					/>

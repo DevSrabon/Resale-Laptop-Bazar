@@ -10,7 +10,7 @@ const CheckoutForm = ({booking}) => {
     const {price, name, email, _id} = booking;
     useEffect(() => {
    
-     fetch("http://localhost:8000/create-payment-intent", {
+     fetch(`${process.env.REACT_APP_API_URL}/create-payment-intent`, {
        method: "POST",
        headers: {
           "Content-Type": "application/json", 

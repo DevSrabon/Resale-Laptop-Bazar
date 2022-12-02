@@ -6,20 +6,20 @@ import { Link, useNavigate} from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useToken from "../../hooks/useToken";
 const SignUp = () => {
+	const { createUser, updateUser, } = useContext(AuthContext);
+	const [createdUserEmail, setCreatedUserEmail] = useState('');
+	const [token] = useToken(createdUserEmail);
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-	const [createdUserEmail, setCreatedUserEmail] = useState("");
-	const [token] = useToken(createdUserEmail);
 	const navigate = useNavigate();
 
 	if (token) {
 		navigate("/");
 	}
 
-	const { createUser, updateUser, } = useContext(AuthContext);
 	const [signUError, setSignUpError] = useState(true);
 	const handleSignUp = (data) => {
 		console.log(data);
@@ -35,7 +35,6 @@ const SignUp = () => {
 				updateUser(userInfo)
 					.then(() => {
                         savedUser(data.name, data.email, data.role);
-                    navigate('/')
 					})
 					.catch((err) => console.error(err));
 			})
@@ -132,7 +131,7 @@ const SignUp = () => {
 					</div>
 					<input
 						className="btn btn-active hover:btn-outline w-full mt-3"
-						value="Login"
+						value="Sign Up"
 						type="submit"
 					/>
 					{signUError && <p>{signUError}</p>}

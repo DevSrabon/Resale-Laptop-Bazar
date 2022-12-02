@@ -46,11 +46,12 @@ const Login = () => {
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
+				setLoginUserEmail(user.email)
 				savedUser(user.displayName, user.email, 'Buyer')
 				toast.success("Login Success");
-				navigate(from, { replace: true });
+
 			})
-			.catch();
+			.catch(error => setLoginError(error.message));
 	};
 	const savedUser = (name, email, role) => {
 		const user = { name, email, role };

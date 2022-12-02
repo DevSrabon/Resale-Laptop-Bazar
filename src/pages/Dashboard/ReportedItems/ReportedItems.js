@@ -53,8 +53,7 @@ const ReportedItems = () => {
 								<th></th>
 								<th>Name</th>
 								<th>Email</th>
-								<th>Role</th>
-								<th>Verified</th>
+								<th>Item Name</th>
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -62,9 +61,10 @@ const ReportedItems = () => {
 							{reportUser?.map((user, i) => (
 								<tr key={user._id}>
 									<th>{ i + 1}</th>
-									<td>{user?.report}</td>
-									<td>{ user.email}</td>
-									<td>{ user.role}</td>
+									<td>{user?.name}</td>
+									<td>{ user?.email}</td>
+									<td>{ user?.model}</td>
+									
 
 									<td>
 										{user?.report && (

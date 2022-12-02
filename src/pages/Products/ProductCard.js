@@ -32,9 +32,6 @@ const ProductCard = ({ product, setModal,  }) => {
 	useEffect(() => {
 		axios.get(`${process.env.REACT_APP_API_URL}/users`)
 			.then(res => setLoadUserData(res.data));
-			// fetch(`${process.env.REACT_APP_API_URL}/users`)
-			// 	.then(res => res.json())
-			// .then(data => setLoadUserData(data))
 		}, [refetch]);
 	
 	useEffect(() => {

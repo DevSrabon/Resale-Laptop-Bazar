@@ -5,7 +5,7 @@ import Advertise from "./Advertise";
 const Advertises = () => {
 	const [advertises, setAdvertises] = useState([]);
 	useEffect(() => {
-		fetch(`http://localhost:8000/products?advertise=true`)
+		fetch(`${process.env.REACT_APP_API_URL}/products?advertise=true`)
 			.then((res) => res.json())
 			.then((data) => {
 				setAdvertises(data);

@@ -33,7 +33,7 @@ const Dashboard = () => {
 							<thead>
 								<tr>
 									<th>SL.</th>
-									<th>Name</th>
+									<th>Model</th>
 									<th>Phone</th>
 									<th>Price</th>
 									<th>Location</th>
