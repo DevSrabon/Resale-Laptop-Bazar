@@ -18,7 +18,6 @@ const ReportedItems = () => {
 							.then((data) => {
 								setLoading(false);
 								setReportUser(data);
-								console.log(data);
 							});
 	
     }, [refetch]);

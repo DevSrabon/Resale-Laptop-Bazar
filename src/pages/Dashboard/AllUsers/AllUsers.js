@@ -43,7 +43,6 @@ const AllUsers = () => {
 	};
 	
 	const handleMakeVerified = (id) => {
-		console.log(id)
 		fetch(`${process.env.REACT_APP_API_URL}/users/admin/${id}`, {
 			method: "PUT",
 			headers: {

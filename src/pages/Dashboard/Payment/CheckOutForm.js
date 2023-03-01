@@ -41,7 +41,6 @@ const CheckoutForm = ({booking}) => {
           card,
         });
         if(error){
-            console.log(error)
             setCardError(error.message)
           }
           else{
@@ -85,7 +84,6 @@ const CheckoutForm = ({booking}) => {
 						})
 							.then((res) => res.json())
 							.then((data) => {
-								console.log(data);
 								if (data.insertedId) {
 									setSuccess("Congrates ! Your payment successfully");
 									setTransactionId(paymentIntent.id);
@@ -113,7 +111,7 @@ const CheckoutForm = ({booking}) => {
                     },
                 }}
             />
-           <button className='btn btn-sm btn-primary mt-5' type="submit" disabled={!stripe || !clientSecret}>
+           <button className='btn btn-sm btn-primary mt-5' type="submit" disabled={!stripe || !clientSecret || processing}>
           Pay
         </button>
         </form>

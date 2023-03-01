@@ -5,8 +5,9 @@ import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useBuyer from "../../hooks/useBuyer";
 import { AuthContext } from "../../contexts/AuthProvider";
-import axios from "axios";
-const ProductCard = ({ product, setModal,  }) => {
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Shared/Loading/Loading";
+const ProductCard = ({ product, setModal, refetch }) => {
 	const { user } = useContext(AuthContext);
 	const {
 		_id,
@@ -27,18 +28,23 @@ const ProductCard = ({ product, setModal,  }) => {
 
 	const [isBuyer] = useBuyer(user?.email)
 
-		const [loadUserData, setLoadUserData] = useState([]);
 	const [userData, setUserData] = useState({});
-	const [refetch, setRefetch] = useState(true)
-	useEffect(() => {
-		axios.get(`${process.env.REACT_APP_API_URL}/users`)
-			.then(res => setLoadUserData(res.data));
-		}, [refetch]);
+const {
+	data: loadUserData = [],
+	isLoading,
+} = useQuery({
+	queryKey: ["users"],
+	queryFn: async () => {
+		const res = await fetch(`${process.env.REACT_APP_API_URL}/users`);
+		const data = await res.json();
+		return data;
+	},
+});
 	
 	useEffect(() => {
 		const data = (loadUserData.find(e => e.email === email) )
 		setUserData(data);
-	}, [email, loadUserData])
+	}, [email, loadUserData]);
 
 	const handleReport = (id) => {
 		fetch(`${process.env.REACT_APP_API_URL}/users/report/${id}`, {
@@ -49,13 +55,15 @@ const ProductCard = ({ product, setModal,  }) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data)
-				if (data.matchedCount > 0) {
-					setRefetch(!report);
+				if (data.modifiedCount > 0) {
+					refetch()
 					toast.success("Reported successful.");
 				}
 			});
 	};
+	if (isLoading) {
+		return <Spinner/>
+	}
 
 	return (
 		<div className="card w-full h-[500px] y bg-base-100 shadow-xl">

@@ -14,7 +14,6 @@ const Advertise = ({ advertise }) => {
 		date,
 		description,
 	} = advertise;
-	console.log(advertise);
 	return (
 		<div className="card w-96 bg-base-100 shadow-xl image-full">
 			<figure>

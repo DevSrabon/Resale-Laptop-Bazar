@@ -4,7 +4,6 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const BookingModal = ({ modal,  setModal }) => {
     const { user } = useContext(AuthContext);
-    console.log(modal);
     const {	
 			brand,
 			resellPrice,
@@ -14,7 +13,6 @@ const BookingModal = ({ modal,  setModal }) => {
 	const handleBooking = (e) => {
 		e.preventDefault();
 		const form = e.target;
-		console.log(form);
 		const name = form.name.value;
 		const model = form.model.value;
 		const price = form.price.value;
@@ -38,7 +36,6 @@ const BookingModal = ({ modal,  setModal }) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
                 if (data.acknowledged) {
                     setModal(null)
 					toast.success("Booking Confirm");

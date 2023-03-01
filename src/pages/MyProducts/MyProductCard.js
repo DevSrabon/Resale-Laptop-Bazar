@@ -16,7 +16,6 @@ const MyProductCard = ({ product, isLoading, refetch, handleAdvertise }) => {
 		advertise,
 		_id,
 	} = product;
-	console.log(advertise);
 
 	const handleDelete = (user) => {
 		fetch(`${process.env.REACT_APP_API_URL}/product/${user}`, {
@@ -32,7 +31,6 @@ const MyProductCard = ({ product, isLoading, refetch, handleAdvertise }) => {
 					refetch();
 				}
 			});
-		console.log(user);
 	};
 
 	if (isLoading) {

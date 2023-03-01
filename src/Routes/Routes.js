@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout/DashboadrdLayout";
 import Main from "../layout/Main/Main";
@@ -15,7 +14,6 @@ import Products from "../pages/Products/Products";
 import Page404 from "../pages/Shared/Page404/Page404";
 import SignUp from "../pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
-import BuyerRoute from "./BuyerRoute";
 import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoute";
 
@@ -43,14 +41,12 @@ export const router = createBrowserRouter([
 			},
 
 			{
-				path: "product/:id",
+				path: "/product/:id",
 				element: (
-					<PrivateRoute>
+				
 						<Products />
-					</PrivateRoute>
+					
 				),
-				loader: ({ params }) =>
-					fetch(`${process.env.REACT_APP_API_URL}/product/${params.id}`),
 			},
 		],
 	},
@@ -58,9 +54,9 @@ export const router = createBrowserRouter([
 	{
 		path: "/dashboard",
 		element: (
-			<PrivateRoute>
+			
 				<DashboardLayout />
-			</PrivateRoute>
+			
 		),
 		errorElement: <Page404 />,
 		children: [

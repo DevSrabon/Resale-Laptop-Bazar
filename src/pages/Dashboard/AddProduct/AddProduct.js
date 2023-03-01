@@ -35,7 +35,6 @@ const {user} = useContext(AuthContext)
 
 	const handleAddProduct = (data) => {
 		const image = data.img[0];
-		console.log(image);
 		const formData = new FormData();
 		formData.append("image", image);
 		const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -71,7 +70,6 @@ const {user} = useContext(AuthContext)
 					})
 						.then((res) => res.json())
 						.then((result) => {
-							console.log(result);
 							toast.success(`${data.brand} is added successfully`);
 							reset()
 						});

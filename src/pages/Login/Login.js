@@ -31,7 +31,6 @@ const Login = () => {
 		signIn(data.email, data.password)
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
 				setLoginUserEmail(data.email);
 				setLoading(false)
 				toast.success('Login Success')
@@ -45,7 +44,6 @@ const Login = () => {
 		googleLogin()
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
 				setLoginUserEmail(user.email)
 				savedUser(user.displayName, user.email, 'Buyer')
 				toast.success("Login Success");

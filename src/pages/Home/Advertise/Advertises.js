@@ -1,17 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
-// import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import React, { useEffect, useState } from "react";
+import Loading from '../../Shared/Loading/Loading'
 import Advertise from "./Advertise";
 
 const Advertises = () => {
 	const [advertises, setAdvertises] = useState([]);
+	const [loading, setLoading] = useState(true);
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_API_URL}/products?advertise=true`)
 			.then((res) => res.json())
 			.then((data) => {
 				setAdvertises(data);
+				setLoading(false)
 			});
 	}, []);
 
+	if (loading) {
+		return <Loading/>
+	}
 	return (
 		<div className="my-10">
 			<h1 className="text-4xl font-bold text-center text-slate-500 my-8">
