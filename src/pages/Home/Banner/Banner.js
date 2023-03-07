@@ -1,23 +1,47 @@
-import React from 'react';
-import './Banner.css'
+import { Player } from "@lottiefiles/react-lottie-player";
+import React from "react";
+import { Link } from "react-router-dom";
+import PrimaryButton from "../../Shared/PrimaryButton/PrimaryButton";
+import "./Banner.css";
 const Banner = () => {
-    return (
-			<div
-				className="hero min-h-[80vh] rounded-lg mb-12"
-				style={{
-                    backgroundImage: `url("https://img.freepik.com/free-photo/female-hand-typing-keyboard-laptop_1150-15742.jpg?w=996&t=st=1669964862~exp=1669965462~hmac=ab0beed9162b446d309ee39b0411719c5f0df5905e5a9ebf8f2645c524b0b650")`,
-                   
-				}}>
-				<div className="hero-overlay bg-opacity-60 rounded-lg"></div>
-				<div className="hero-content text-center text-neutral-content">
-					<div className="max-w-md">
-						<h1 className="mb-5 text-4xl font-bold">Welcome To Laptop Bazar</h1>
-						<p className="mb-5">You can Buy and Sell your purchase Products</p>
-						<button className="btn  btn-outline">Get Started</button>
+	return (
+		<>
+			<section className="dark:bg-gray-800 dark:text-gray-100">
+				<div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
+					<div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+						<h1 className="text-5xl text-[navy] font-bold leading-none sm:text-6xl">
+							Welcome To Laptop Bazar
+						</h1>
+						<p className="mt-6 mb-4 text-lg sm:mb-6">
+							Looking for a high-quality, pre-owned laptop at an affordable
+							price?
+							<br className="hidden md:inline lg:hidden" />
+							You've come to the right place! At Laptop Resale Bazar, we offer a
+							wide selection of laptops from top brands like Acer, Dell, HP.
+						</p>
+						<div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+							<Link
+								to={"/login"}>
+								{" "}
+								<PrimaryButton>
+									Get Started
+								</PrimaryButton>
+							</Link>
+						</div>
+					</div>
+					<div className="hidden md:flex items-center justify-center p-6   md:mt-18 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+						<Player
+							autoplay
+							loop
+							className="w-[80%]"
+							src={
+								"https://assets2.lottiefiles.com/packages/lf20_g1YJeb.json"
+							}></Player>
 					</div>
 				</div>
-			</div>
-		);
+			</section>
+		</>
+	);
 };
 
 export default Banner;

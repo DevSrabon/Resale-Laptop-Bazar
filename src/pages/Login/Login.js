@@ -70,9 +70,9 @@ const Login = () => {
 		<div className="h-[800px] flex justify-center items-center ">
 			<div className="w-96 p-7 shadow-2xl">
 				<span className="flex justify-center">
-					<BiUserCircle className="text-8xl text-slate-400" />
+					<BiUserCircle className="text-8xl text-[navy]" />
 				</span>
-				<h2 className="text-xl font-bold text-center text-slate-400">Login</h2>
+				<h2 className="text-xl font-bold text-center text-[navy]">Login</h2>
 				<form onSubmit={handleSubmit(handleLogin)}>
 					<div className="form-control w-full max-w-xs">
 						<label className="label">
@@ -112,7 +112,7 @@ const Login = () => {
 						</label>
 					</div>
 					<input
-						className="btn btn-active hover:btn-outline w-full"
+						className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full"
 						value="Login"
 						type="submit"
 					/>

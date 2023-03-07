@@ -1,24 +1,18 @@
-import React from 'react';
-import AboutUs from '../AboutUs/AboutUs';
-import Advertises from '../Advertise/Advertises';
-import Carousel from '../Carousel/Carousel';
-import Categories from '../Categories/Categories';
-import Banner from '../Banner/Banner'
+import React from "react";
+import AboutUs from "../AboutUs/AboutUs";
+import Advertises from "../Advertise/Advertises";
+import Categories from "../Categories/Categories";
+import Banner from "../Banner/Banner";
 const Home = () => {
+	return (
+		<>
+			<Banner />
 
-    return (
-        <>
-            <Banner/>
-<Carousel />
-<Advertises/>
-<Categories />
-<AboutUs/>
-
-</>
-            
-
-       
-    );
+				<Advertises />
+				<Categories />
+				<AboutUs />
+		</>
+	);
 };
 
 export default Home;

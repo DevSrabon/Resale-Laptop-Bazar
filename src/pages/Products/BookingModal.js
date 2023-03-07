@@ -7,7 +7,8 @@ const BookingModal = ({ modal,  setModal }) => {
     const {	
 			brand,
 			resellPrice,
-			model,
+		model,
+			_id,
 		} = modal;
 
 	const handleBooking = (e) => {
@@ -20,6 +21,7 @@ const BookingModal = ({ modal,  setModal }) => {
 		const phone = form.phone.value;
 		const location = form.location.value;
 		const booking = {
+			pId: _id,
 			name,
 			price,
 			email,

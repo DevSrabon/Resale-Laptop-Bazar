@@ -11,7 +11,7 @@ const AboutUs = () => {
 					className="max-w-sm rounded-lg shadow-2xl"
 				/>
 				<div>
-					<h1 className="text-center text-4xl font-semibold text-orange-400 mb-10">About Us</h1>
+					<h1 className="text-center text-4xl font-bold text-[navy] mb-10">About Us</h1>
 					<p className="text-xl text-gray-400 text-justify">
 						Laptop Bazar is the best used laptop shop in Bangladesh and a
 						leading seller of all kinds of IT products. It’s been a place of

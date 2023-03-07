@@ -2,12 +2,12 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { BiUserCircle } from "react-icons/bi";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useToken from "../../hooks/useToken";
 const SignUp = () => {
-	const { createUser, updateUser, } = useContext(AuthContext);
-	const [createdUserEmail, setCreatedUserEmail] = useState('');
+	const { createUser, updateUser } = useContext(AuthContext);
+	const [createdUserEmail, setCreatedUserEmail] = useState("");
 	const [token] = useToken(createdUserEmail);
 	const {
 		register,
@@ -36,14 +36,13 @@ const SignUp = () => {
 							savedUser(data.name, data.email, data.role);
 						})
 						.catch((err) => console.error(err));
-},100)
+				}, 100);
 			})
 			.catch((err) => {
 				setSignUpError(err.message);
 			});
 	};
 
-	
 	const savedUser = (name, email, role) => {
 		const user = { name, email, role };
 		fetch(`${process.env.REACT_APP_API_URL}/users`, {
@@ -63,9 +62,9 @@ const SignUp = () => {
 		<div className="h-[800px] flex justify-center items-center ">
 			<div className="w-96 p-7 shadow-2xl">
 				<span className="flex justify-center">
-					<BiUserCircle className="text-8xl text-slate-400" />
+					<BiUserCircle className="text-8xl text-[navy]" />
 				</span>
-				<h2 className="text-xl font-bold text-center text-slate-400">Sign Up</h2>
+				<h2 className="text-xl font-bold text-center text-[navy]">Sign Up</h2>
 				<form onSubmit={handleSubmit(handleSignUp)}>
 					<div className="form-control w-full max-w-xs">
 						<label className="label">
@@ -130,7 +129,7 @@ const SignUp = () => {
 						</select>
 					</div>
 					<input
-						className="btn btn-active hover:btn-outline w-full mt-3"
+						className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full mt-3"
 						value="Sign Up"
 						type="submit"
 					/>

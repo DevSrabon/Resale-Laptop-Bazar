@@ -1,7 +1,7 @@
 # Laptop Bazar
 
 
-## Live web application Link: https://laptop-bazar-83d41.web.app/
+## Live web application Link: https://resale-laptop-bazar.vercel.app/
 ## Client Side Code Link: https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-DevSrabon.git 
 ### Server Side Code Link: https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-DevSrabon.git ###
 * adminEmail: srabonfb@gmail.com

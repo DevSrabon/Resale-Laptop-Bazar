@@ -1,22 +1,22 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import PrimaryButton from '../../Shared/PrimaryButton/PrimaryButton';
 
 const CheckoutForm = ({booking}) => {
+    console.log("🚀 ~ file: CheckOutForm.js:5 ~ CheckoutForm ~ booking:", booking)
     const[cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState("");
     const [success, setSuccess] = useState('');
     const[processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState();
     const {price, name, email, _id} = booking;
-    useEffect(() => {
-   
-     fetch(`${process.env.REACT_APP_API_URL}/create-payment-intent`, {
-       method: "POST",
+    useEffect(() => {fetch(`${process.env.REACT_APP_API_URL}/create-payment-intent`, {
+      method: "POST",
        headers: {
           "Content-Type": "application/json", 
           authorization:` bearer ${localStorage.getItem('accessToken')}`
          },
-       body: JSON.stringify({price}),
+       body: JSON.stringify({price})
      })
        .then((res) => res.json())
        .then((data) => setClientSecret(data.clientSecret));
@@ -93,38 +93,43 @@ const CheckoutForm = ({booking}) => {
           setProcessing(false)
     }
     return (
-       <>
-        <form onSubmit={handleSubmit}>
-            <CardElement
-                options={{
-                    style: {
-                        base: {
-                            fontSize: '16px',
-                            color: '#424770',
-                            '::placeholder': {
-                                color: '#aab7c4',
-                            },
-                        },
-                        invalid: {
-                            color: '#9e2146',
-                        },
-                    },
-                }}
-            />
-           <button className='btn btn-sm btn-primary mt-5' type="submit" disabled={!stripe || !clientSecret || processing}>
-          Pay
-        </button>
-        </form>
-        <p className='text-red-500'>{cardError}</p>
-             {
-        success && <div>
-          <p className='text-green-500'>{success}</p>
-          <p>Your TransactionId:  <span className='text-bold'>{transactionId}</span></p>
-        </div>
-       
-      }
-       </>
-    );
+			<>
+				<form onSubmit={handleSubmit}>
+					<CardElement
+						options={{
+							style: {
+								base: {
+									fontSize: "16px",
+									color: "#424770",
+									"::placeholder": {
+										color: "#aab7c4",
+									},
+								},
+								invalid: {
+									color: "#9e2146",
+								},
+							},
+						}}
+					/>
+					<button
+						className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-4 cursor-pointer py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 mt-5"
+						type="submit"
+						disabled={!stripe || !clientSecret || processing}>
+						Pay
+					</button>
+				</form>
+				<p className="text-red-500">{cardError}</p>
+				{success && (
+					<div>
+						<p className="text-green-500">{success}</p>
+						<p>
+							Your TransactionId:{" "}
+							<span className="text-bold">{transactionId}</span>
+						</p>
+					</div>
+				)}
+			</>
+		);
 };
 
 export default CheckoutForm;

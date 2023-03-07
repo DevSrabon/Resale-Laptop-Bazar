@@ -22,16 +22,13 @@ const AddProduct = () => {
 	const { data: categories, isLoading } = useQuery({
 		queryKey: ["categories"],
 		queryFn: async () => {
-			const res = fetch(
-				`${process.env.REACT_APP_API_URL}/homes`
-			);
+			const res = fetch(`${process.env.REACT_APP_API_URL}/homes`);
 			const data = (await res).json();
 			return data;
 		},
 	});
 
-
-const {user} = useContext(AuthContext)
+	const { user } = useContext(AuthContext);
 
 	const handleAddProduct = (data) => {
 		const image = data.img[0];
@@ -53,11 +50,11 @@ const {user} = useContext(AuthContext)
 						location: data.location,
 						purchase: data.purchase,
 						description: data.description,
-						resellPrice: data.resellPrice,
-						originalPrice: data.originalPrice,
+						resellPrice: parseFloat(data.resellPrice.replace(/,/g, "")),
+						originalPrice: parseFloat(data.originalPrice.replace(/,/g, "")),
 						brand: data.brand,
 						image: imgData.data.url,
-						date
+						date,
 					};
 					// save product information into the database
 					fetch(`${process.env.REACT_APP_API_URL}/product`, {
@@ -71,7 +68,7 @@ const {user} = useContext(AuthContext)
 						.then((res) => res.json())
 						.then((result) => {
 							toast.success(`${data.brand} is added successfully`);
-							reset()
+							reset();
 						});
 				}
 			});
@@ -81,7 +78,7 @@ const {user} = useContext(AuthContext)
 	}
 	return (
 		<div className="w-96 mx-auto p-7 my-10 shadow-2xl rounded-lg">
-			<h3 className="text-3xl text-center font-semibold text-slate-400">
+			<h3 className="text-3xl text-center font-semibold text-[navy]">
 				{" "}
 				Sell A Laptop
 			</h3>

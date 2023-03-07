@@ -69,12 +69,14 @@ const Navbar = () => {
 					</div>
 					<Link
 						to="/"
-						className="btn btn-ghost normal-case text-slate-400 text-3xl">
+						className="btn btn-ghost normal-case text-[#2d2d9a] text-3xl font-bold">
 						Laptop Bazar
 					</Link>
 				</div>
 				<div className="navbar-center hidden  font-bold lg:flex">
-					<ul className="menu menu-horizontal p-0 text-slate-400">{menuItems}</ul>
+					<ul className="menu menu-horizontal p-0 text-[#2d2d9a]">
+						{menuItems}
+					</ul>
 				</div>
 				<label
 					htmlFor="dashboard-drawer"
@@ -92,7 +94,6 @@ const Navbar = () => {
 							strokeWidth="2"
 							d="M4 6h16M4 12h8m-8 6h16"
 						/>
-						
 					</svg>
 				</label>
 			</nav>

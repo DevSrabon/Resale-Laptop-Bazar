@@ -19,7 +19,7 @@ const Advertises = () => {
 	}
 	return (
 		<div className="my-10">
-			<h1 className="text-4xl font-bold text-center text-slate-500 my-8">
+			<h1 className="text-4xl font-bold text-center text-[navy] my-8">
 				Best {advertises.length} Laptop
 			</h1>
 			<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-5">
