@@ -46,7 +46,7 @@ const MyProducts = () => {
 			</h4>
 
 			<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
-				{products.map((product) => (
+				{products?.map((product) => (
 					<MyProductCard
 						key={product._id}
 						isLoading={isLoading}

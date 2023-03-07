@@ -11,7 +11,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 const Payment = () => {
 	const booking = useLoaderData();
 	const navigation = useNavigation();
-	const { model, price, } = booking;
+	const { model, price, pId } = booking;
 	if (navigation.state === "loading") {
 		return <Loading></Loading>;
 	}
@@ -25,7 +25,7 @@ const Payment = () => {
 			<div className="w-96 my-12">
 				{" "}
 				<Elements stripe={stripePromise}>
-					<CheckOutForm booking={booking} />
+					<CheckOutForm booking={booking}/>
 				</Elements>
 			</div>
 		</div>

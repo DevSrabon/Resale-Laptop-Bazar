@@ -77,18 +77,19 @@ const AddProduct = () => {
 		return <Loading></Loading>;
 	}
 	return (
-		<div className="w-96 mx-auto p-7 my-10 shadow-2xl rounded-lg">
+		<div className=" p-7 my-10">
 			<h3 className="text-3xl text-center font-semibold text-[navy]">
 				{" "}
 				Sell A Laptop
 			</h3>
-			<form onSubmit={handleSubmit(handleAddProduct)}>
-				<div className="form-control w-full max-w-xs">
+			<form className="flex flex-col justify-evenly items-start gap-4 mt-5 md:flex-row md:gap-10" onSubmit={handleSubmit(handleAddProduct)}>
+				<div className="w-full">
+				<div className="form-control w-full ">
 					<label className="label">
 						<span className="label-text">Model</span>
 					</label>
 					<input
-						className="input input-bordered w-full max-w-xs"
+						className="input input-bordered w-full "
 						type="text"
 						{...register("model", {
 							required: "Model is required",
@@ -98,12 +99,12 @@ const AddProduct = () => {
 						<p className="text-red-600">{errors.model?.message}</p>
 					)}
 				</div>
-				<div className="form-control w-full max-w-xs">
+				<div className="form-control w-full ">
 					<label className="label">
 						<span className="label-text">Location</span>
 					</label>
 					<input
-						className="input input-bordered w-full max-w-xs"
+						className="input input-bordered w-full "
 						type="text"
 						{...register("location", {
 							required: "Location is required",
@@ -113,13 +114,13 @@ const AddProduct = () => {
 						<p className="text-red-600">{errors.location?.message}</p>
 					)}
 				</div>
-				<div className="flex gap-3">
-					<div className="form-control w-full max-w-xs">
+				<div className="w-full">
+					<div className="form-control w-full ">
 						<label className="label">
 							<span className="label-text">Original Price</span>
 						</label>
 						<input
-							className="input input-bordered w-full max-w-xs"
+							className="input input-bordered w-full "
 							type="text"
 							{...register("originalPrice", {
 								required: "Original Price is required",
@@ -129,12 +130,12 @@ const AddProduct = () => {
 							<p className="text-red-600">{errors.originalPrice?.message}</p>
 						)}
 					</div>
-					<div className="form-control w-full max-w-xs">
+					<div className="form-control w-full ">
 						<label className="label">
 							<span className="label-text">Resale Price</span>
 						</label>
 						<input
-							className="input input-bordered w-full max-w-xs"
+							className="input input-bordered w-full "
 							type="text"
 							{...register("resellPrice", {
 								required: "Resell Price is required",
@@ -146,12 +147,31 @@ const AddProduct = () => {
 					</div>
 				</div>
 
-				<div className="form-control w-full max-w-xs">
+
+
+				<div className="form-control w-full ">
+					<label className="label">
+						<span className="label-text">Description</span>
+					</label>
+					<textarea
+						className="textarea textarea-bordered textarea-lg  w-full"
+						type="text"
+						{...register("description", {
+							required: "Year of purchase is required",
+						})}
+					/>
+					{errors.purchase && (
+						<p className="text-red-600">{errors.purchase?.message}</p>
+					)}
+				</div>
+				</div>
+				<div className="w-full">
+				<div className="form-control w-full ">
 					<label className="label">
 						<span className="label-text">Year of purchase</span>
 					</label>
 					<input
-						className="input input-bordered w-full max-w-xs"
+						className="input input-bordered w-full "
 						type="text"
 						{...register("purchase", {
 							required: "Year of purchase is required",
@@ -162,36 +182,21 @@ const AddProduct = () => {
 					)}
 				</div>
 
-				<div className="form-control w-full max-w-xs">
-					<label className="label">
-						<span className="label-text">Description</span>
-					</label>
-					<textarea
-						className="input input-bordered w-full max-w-xs"
-						type="text"
-						{...register("description", {
-							required: "Year of purchase is required",
-						})}
-					/>
-					{errors.purchase && (
-						<p className="text-red-600">{errors.purchase?.message}</p>
-					)}
-				</div>
-				<div className="form-control w-full max-w-xs">
+				<div className="form-control w-full ">
 					<label className="label">
 						<span className="label-text">Brand</span>
 					</label>
 					<select
 						{...register("brand")}
-						className="select input-bordered w-full max-w-xs">
-						{categories.map((category) => (
+						className="select input-bordered w-full ">
+						{categories?.map((category) => (
 							<option key={category._id} value={category.brand}>
 								{category.brand}
 							</option>
 						))}
 					</select>
 				</div>
-				<div className="form-control w-full max-w-xs">
+				<div className="form-control w-full ">
 					<label className="label">
 						<span className="label-text">Condition</span>
 					</label>
@@ -199,18 +204,18 @@ const AddProduct = () => {
 						{...register("condition", {
 							required: "Condition is required",
 						})}
-						className="select input-bordered w-full max-w-xs">
+						className="select input-bordered w-full ">
 						<option value="Good">Good</option>
 						<option value="Bad">Bad</option>
 						<option value="Excellent">Excellent</option>
 					</select>
 				</div>
-				<div className="form-control w-full max-w-xs">
+				<div className="form-control w-full ">
 					<label className="label">
 						<span className="label-text">Phone Number</span>
 					</label>
 					<input
-						className="input input-bordered w-full max-w-xs"
+						className="input input-bordered w-full "
 						type="number"
 						{...register("phone", {
 							required: "Phone number is required",
@@ -224,12 +229,12 @@ const AddProduct = () => {
 						<p className="text-red-600">{errors.phone?.message}</p>
 					)}
 				</div>
-				<div className="form-control w-full max-w-xs">
+				<div className="form-control w-full ">
 					<label className="label">
 						<span className="label-text">Photo</span>
 					</label>
 					<input
-						className="input input-bordered w-full max-w-xs"
+						className="input input-bordered w-full "
 						type="file"
 						{...register("img", {
 							required: "Photo is required",
@@ -242,6 +247,7 @@ const AddProduct = () => {
 					value="Add Product"
 					type="submit"
 				/>
+				</div>
 			</form>
 		</div>
 	);
