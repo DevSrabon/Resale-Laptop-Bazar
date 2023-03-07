@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Loading from '../../Shared/Loading/Loading'
+import { styles } from "../../../styles";
+import Loading from "../../Shared/Loading/Loading";
 import Advertise from "./Advertise";
 
 const Advertises = () => {
@@ -10,16 +11,16 @@ const Advertises = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				setAdvertises(data);
-				setLoading(false)
+				setLoading(false);
 			});
 	}, []);
 
 	if (loading) {
-		return <Loading/>
+		return <Loading />;
 	}
 	return (
 		<div className="my-10">
-			<h1 className="text-4xl font-bold text-center text-[navy] my-8">
+			<h1 className={`${styles.SectionHeadText}`}>
 				Best {advertises.length} Laptop
 			</h1>
 			<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-5">

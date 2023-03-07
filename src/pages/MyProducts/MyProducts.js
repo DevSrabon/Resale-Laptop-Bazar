@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { styles } from "../../styles";
 import MyProductCard from "./MyProductCard";
 
 const MyProducts = () => {
@@ -43,9 +44,7 @@ const MyProducts = () => {
 	};
 	return (
 		<div>
-			<h4 className="text-3xl text-center font-bold text-[navy] my-5">
-				My Products
-			</h4>
+			<h4 className={`${styles.SectionHeadText}`}>My Products</h4>
 
 			<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
 				{products?.map((product) => (

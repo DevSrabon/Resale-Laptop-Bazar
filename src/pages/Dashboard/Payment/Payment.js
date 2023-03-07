@@ -3,6 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import React from "react";
 import { useNavigation } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
+import { styles } from "../../../styles";
 import Loading from "../../Shared/Loading/Loading";
 import CheckOutForm from "./CheckOutForm";
 
@@ -16,13 +17,13 @@ const Payment = () => {
 		return <Loading></Loading>;
 	}
 	return (
-		<div>
-			<h3 className="text-3xl">Payment for {model}</h3>
-			<p className="text-xl mt-4 text-[navy]">
+		<div className=" mt-10 pb-10">
+			<h3 className={`${styles.SectionHeadText}`}>Payment for {model}</h3>
+			<p className={`${styles.SectionSubText}`}>
 				Please pay <strong>${price}</strong> for your appointment on{" "}
 				
 			</p>
-			<div className="w-96 my-12">
+			<div className="w-96 my-12 mx-auto">
 				{" "}
 				<Elements stripe={stripePromise}>
 					<CheckOutForm booking={booking}/>
