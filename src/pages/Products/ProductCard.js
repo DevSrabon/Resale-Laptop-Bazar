@@ -95,18 +95,18 @@ const {
 					</p>
 				</div>
 
-				<div className="card-actions items-center gap-16">
-					{ isBuyer &&
+				<div className="flex justify-between items-center w-full">
+					{isBuyer && (
 						<label
 							onClick={() => setModal(product)}
-							className="btn btn-primary"
+							className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer"
 							htmlFor="booking-modal">
 							Book Now
 						</label>
-					}
+					)}
 					{isBuyer && !report && (
 						<button
-							className="btn btn-primary"
+							className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer"
 							onClick={() => handleReport(_id)}>
 							Report
 						</button>

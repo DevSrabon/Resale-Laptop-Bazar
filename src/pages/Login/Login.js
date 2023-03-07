@@ -5,13 +5,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useToken from "../../hooks/useToken";
 import { BiUserCircle } from "react-icons/bi";
+import PrimaryButton from "../Shared/PrimaryButton/PrimaryButton";
+import SmallSpinner from "../Shared/Loading/SmaillSpinner";
 const Login = () => {
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-	const { signIn, googleLogin, setLoading } = useContext(AuthContext);
+	const { signIn, googleLogin, setLoading, loading } = useContext(AuthContext);
 	const [loginError, setLoginError] = useState("");
 	const [loginUserEmail, setLoginUserEmail] = useState("");
 	const [token] = useToken(loginUserEmail);
@@ -111,11 +113,7 @@ const Login = () => {
 							<span className="label-text">Forget password</span>
 						</label>
 					</div>
-					<input
-						className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full"
-						value="Login"
-						type="submit"
-					/>
+					<PrimaryButton disabled={loading} type={"submit"} classes ={"w-full"}>{loading ? <SmallSpinner /> : 'Login'}</PrimaryButton>
 					<div>
 						{loginError && <p className="text-red-600">{loginError}</p>}
 					</div>

@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Loading from "../../Shared/Loading/Loading";
+import SmallSpinner from "../../Shared/Loading/SmaillSpinner";
+import PrimaryButton from "../../Shared/PrimaryButton/PrimaryButton";
 
 const AddProduct = () => {
 	const {
@@ -13,7 +15,7 @@ const AddProduct = () => {
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-
+const [loading, setLoading] = useState(false)
 	const imageHostKey = process.env.REACT_APP_imgbb_key;
 	const navigate = useNavigate();
 
@@ -31,6 +33,7 @@ const AddProduct = () => {
 	const { user } = useContext(AuthContext);
 
 	const handleAddProduct = (data) => {
+		setLoading(true);
 		const image = data.img[0];
 		const formData = new FormData();
 		formData.append("image", image);
@@ -69,6 +72,7 @@ const AddProduct = () => {
 						.then((result) => {
 							toast.success(`${data.brand} is added successfully`);
 							reset();
+							setLoading(false);
 						});
 				}
 			});
@@ -82,171 +86,171 @@ const AddProduct = () => {
 				{" "}
 				Sell A Laptop
 			</h3>
-			<form className="flex flex-col justify-evenly items-start gap-4 mt-5 md:flex-row md:gap-10" onSubmit={handleSubmit(handleAddProduct)}>
-				<div className="w-full">
-				<div className="form-control w-full ">
-					<label className="label">
-						<span className="label-text">Model</span>
-					</label>
-					<input
-						className="input input-bordered w-full "
-						type="text"
-						{...register("model", {
-							required: "Model is required",
-						})}
-					/>
-					{errors.model && (
-						<p className="text-red-600">{errors.model?.message}</p>
-					)}
-				</div>
-				<div className="form-control w-full ">
-					<label className="label">
-						<span className="label-text">Location</span>
-					</label>
-					<input
-						className="input input-bordered w-full "
-						type="text"
-						{...register("location", {
-							required: "Location is required",
-						})}
-					/>
-					{errors.location && (
-						<p className="text-red-600">{errors.location?.message}</p>
-					)}
-				</div>
+			<form
+				className="flex flex-col justify-evenly items-start gap-4 mt-5 md:flex-row md:gap-10"
+				onSubmit={handleSubmit(handleAddProduct)}>
 				<div className="w-full">
 					<div className="form-control w-full ">
 						<label className="label">
-							<span className="label-text">Original Price</span>
+							<span className="label-text">Model</span>
 						</label>
 						<input
 							className="input input-bordered w-full "
 							type="text"
-							{...register("originalPrice", {
-								required: "Original Price is required",
+							{...register("model", {
+								required: "Model is required",
 							})}
 						/>
-						{errors.originalPrice && (
-							<p className="text-red-600">{errors.originalPrice?.message}</p>
+						{errors.model && (
+							<p className="text-red-600">{errors.model?.message}</p>
 						)}
 					</div>
 					<div className="form-control w-full ">
 						<label className="label">
-							<span className="label-text">Resale Price</span>
+							<span className="label-text">Location</span>
 						</label>
 						<input
 							className="input input-bordered w-full "
 							type="text"
-							{...register("resellPrice", {
-								required: "Resell Price is required",
+							{...register("location", {
+								required: "Location is required",
 							})}
 						/>
-						{errors.resellPrice && (
-							<p className="text-red-600">{errors.resellPrice?.message}</p>
+						{errors.location && (
+							<p className="text-red-600">{errors.location?.message}</p>
+						)}
+					</div>
+					<div className="w-full">
+						<div className="form-control w-full ">
+							<label className="label">
+								<span className="label-text">Original Price</span>
+							</label>
+							<input
+								className="input input-bordered w-full "
+								type="text"
+								{...register("originalPrice", {
+									required: "Original Price is required",
+								})}
+							/>
+							{errors.originalPrice && (
+								<p className="text-red-600">{errors.originalPrice?.message}</p>
+							)}
+						</div>
+						<div className="form-control w-full ">
+							<label className="label">
+								<span className="label-text">Resale Price</span>
+							</label>
+							<input
+								className="input input-bordered w-full "
+								type="text"
+								{...register("resellPrice", {
+									required: "Resell Price is required",
+								})}
+							/>
+							{errors.resellPrice && (
+								<p className="text-red-600">{errors.resellPrice?.message}</p>
+							)}
+						</div>
+					</div>
+
+					<div className="form-control w-full ">
+						<label className="label">
+							<span className="label-text">Description</span>
+						</label>
+						<textarea
+							className="textarea textarea-bordered textarea-lg  w-full"
+							type="text"
+							{...register("description", {
+								required: "Year of purchase is required",
+							})}
+						/>
+						{errors.purchase && (
+							<p className="text-red-600">{errors.purchase?.message}</p>
 						)}
 					</div>
 				</div>
-
-
-
-				<div className="form-control w-full ">
-					<label className="label">
-						<span className="label-text">Description</span>
-					</label>
-					<textarea
-						className="textarea textarea-bordered textarea-lg  w-full"
-						type="text"
-						{...register("description", {
-							required: "Year of purchase is required",
-						})}
-					/>
-					{errors.purchase && (
-						<p className="text-red-600">{errors.purchase?.message}</p>
-					)}
-				</div>
-				</div>
 				<div className="w-full">
-				<div className="form-control w-full ">
-					<label className="label">
-						<span className="label-text">Year of purchase</span>
-					</label>
-					<input
-						className="input input-bordered w-full "
-						type="text"
-						{...register("purchase", {
-							required: "Year of purchase is required",
-						})}
-					/>
-					{errors.purchase && (
-						<p className="text-red-600">{errors.purchase?.message}</p>
-					)}
-				</div>
+					<div className="form-control w-full ">
+						<label className="label">
+							<span className="label-text">Year of purchase</span>
+						</label>
+						<input
+							className="input input-bordered w-full "
+							type="text"
+							{...register("purchase", {
+								required: "Year of purchase is required",
+							})}
+						/>
+						{errors.purchase && (
+							<p className="text-red-600">{errors.purchase?.message}</p>
+						)}
+					</div>
 
-				<div className="form-control w-full ">
-					<label className="label">
-						<span className="label-text">Brand</span>
-					</label>
-					<select
-						{...register("brand")}
-						className="select input-bordered w-full ">
-						{categories?.map((category) => (
-							<option key={category._id} value={category.brand}>
-								{category.brand}
-							</option>
-						))}
-					</select>
-				</div>
-				<div className="form-control w-full ">
-					<label className="label">
-						<span className="label-text">Condition</span>
-					</label>
-					<select
-						{...register("condition", {
-							required: "Condition is required",
-						})}
-						className="select input-bordered w-full ">
-						<option value="Good">Good</option>
-						<option value="Bad">Bad</option>
-						<option value="Excellent">Excellent</option>
-					</select>
-				</div>
-				<div className="form-control w-full ">
-					<label className="label">
-						<span className="label-text">Phone Number</span>
-					</label>
-					<input
-						className="input input-bordered w-full "
-						type="number"
-						{...register("phone", {
-							required: "Phone number is required",
-							minLength: {
-								value: 11,
-								message: "Number Should be 11 character or longer",
-							},
-						})}
-					/>
-					{errors.phone && (
-						<p className="text-red-600">{errors.phone?.message}</p>
-					)}
-				</div>
-				<div className="form-control w-full ">
-					<label className="label">
-						<span className="label-text">Photo</span>
-					</label>
-					<input
-						className="input input-bordered w-full "
-						type="file"
-						{...register("img", {
-							required: "Photo is required",
-						})}
-					/>
-					{errors.img && <p className="text-red-600">{errors.img?.message}</p>}
-				</div>
-				<input
-					className="btn  btn-active hover:btn-outline w-full mt-3"
-					value="Add Product"
-					type="submit"
-				/>
+					<div className="form-control w-full ">
+						<label className="label">
+							<span className="label-text">Brand</span>
+						</label>
+						<select
+							{...register("brand")}
+							className="select input-bordered w-full ">
+							{categories?.map((category) => (
+								<option key={category._id} value={category.brand}>
+									{category.brand}
+								</option>
+							))}
+						</select>
+					</div>
+					<div className="form-control w-full ">
+						<label className="label">
+							<span className="label-text">Condition</span>
+						</label>
+						<select
+							{...register("condition", {
+								required: "Condition is required",
+							})}
+							className="select input-bordered w-full ">
+							<option value="Good">Good</option>
+							<option value="Bad">Bad</option>
+							<option value="Excellent">Excellent</option>
+						</select>
+					</div>
+					<div className="form-control w-full ">
+						<label className="label">
+							<span className="label-text">Phone Number</span>
+						</label>
+						<input
+							className="input input-bordered w-full "
+							type="number"
+							{...register("phone", {
+								required: "Phone number is required",
+								minLength: {
+									value: 11,
+									message: "Number Should be 11 character or longer",
+								},
+							})}
+						/>
+						{errors.phone && (
+							<p className="text-red-600">{errors.phone?.message}</p>
+						)}
+					</div>
+					<div className="form-control w-full ">
+						<label className="label">
+							<span className="label-text">Photo</span>
+						</label>
+						<input
+							className="input input-bordered w-full "
+							type="file"
+							{...register("img", {
+								required: "Photo is required",
+							})}
+						/>
+						{errors.img && (
+							<p className="text-red-600">{errors.img?.message}</p>
+						)}
+					</div>
+					<PrimaryButton disabled={loading} classes={"w-full mt-3"} type={"submit"}>
+						{loading ? <SmallSpinner /> : "Add Product"}
+					</PrimaryButton>
 				</div>
 			</form>
 		</div>

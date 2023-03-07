@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../Shared/Loading/Loading";
 import BookingModal from "./BookingModal";
 import ProductCard from "./ProductCard";
 
 const Products = () => {
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	const { id } = useParams();
 	const {
 		data: products = [],
@@ -19,7 +22,6 @@ const Products = () => {
 			return data;
 		},
 	});
-
 	const [modal, setModal] = useState("");
 	if (isLoading) {
 		return <Spinner />;
@@ -27,7 +29,7 @@ const Products = () => {
 
 	return (
 		<div>
-			<h4 className="text-3xl text-center font-bold text-[navy] my-5"></h4>
+			<h4 className="text-3xl text-center font-bold text-[navy] my-5">{ products[0].brand}</h4>
 
 			<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4 mb-5">
 				{products.length > 0 &&

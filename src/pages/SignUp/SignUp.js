@@ -5,8 +5,10 @@ import { BiUserCircle } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useToken from "../../hooks/useToken";
+import SmallSpinner from "../Shared/Loading/SmaillSpinner";
+import PrimaryButton from "../Shared/PrimaryButton/PrimaryButton";
 const SignUp = () => {
-	const { createUser, updateUser } = useContext(AuthContext);
+	const { createUser, updateUser, loading } = useContext(AuthContext);
 	const [createdUserEmail, setCreatedUserEmail] = useState("");
 	const [token] = useToken(createdUserEmail);
 	const {
@@ -128,11 +130,9 @@ const SignUp = () => {
 							<option value="Buyer">Buyer</option>
 						</select>
 					</div>
-					<input
-						className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full mt-3"
-						value="Sign Up"
-						type="submit"
-					/>
+					<PrimaryButton disabled={loading} type={"submit"} classes={"w-full mt-3"}>
+						{loading ? <SmallSpinner /> : "Login"}
+					</PrimaryButton>
 					{signUError && <p>{signUError}</p>}
 				</form>
 				<p className="mt-3 text-center">

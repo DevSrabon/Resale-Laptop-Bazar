@@ -5,8 +5,10 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import MyProductCard from "./MyProductCard";
 
 const MyProducts = () => {
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	const { user } = useContext(AuthContext);
-
 	const url = `${process.env.REACT_APP_API_URL}/product?email=${user?.email}`;
 	const {
 		data: products = [],

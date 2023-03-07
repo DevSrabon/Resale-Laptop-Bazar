@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-
 import toast from "react-hot-toast";
-
 import Loading from "../../Shared/Loading/Loading";
 import { getAuth, deleteUser } from "firebase/auth";
+import { useEffect } from "react";
 
 const auth = getAuth();
-
 const removeUser = auth.currentUser;
 const AllUsers = () => {
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	const {
 		data: users = [],
 		refetch,

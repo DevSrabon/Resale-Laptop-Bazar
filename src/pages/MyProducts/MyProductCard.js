@@ -38,7 +38,6 @@ const MyProductCard = ({ product, isLoading, refetch, handleAdvertise }) => {
 	}
 	return (
 		<>
-			{!advertise && (
 				<div className="card w-full h-[500px] y bg-base-100 shadow-xl">
 					<figure className="px-10 mt-5">
 						<img src={image} alt="Shoes" className="rounded-lg" />
@@ -59,13 +58,14 @@ const MyProductCard = ({ product, isLoading, refetch, handleAdvertise }) => {
 							</p>
 						</div>
 
-						<div className="card-actions items-center gap-16">
-							<button
+					<div className="flex justify-between items-center w-full">
+						{advertise ? <code className='bg-primary text-white py-1 px-2 rounded-lg'>Advertised</code> : <button
 								onClick={() => handleAdvertise(_id)}
 								className="btn btn-primary btn-sm
 							">
 								Advertise Now
-							</button>
+							</button>}
+							
 
 							<button
 								onClick={() => handleDelete(_id)}
@@ -75,7 +75,6 @@ const MyProductCard = ({ product, isLoading, refetch, handleAdvertise }) => {
 						</div>
 					</div>
 				</div>
-			)}
 		</>
 	);
 };
