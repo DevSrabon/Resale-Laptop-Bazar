@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Category from './Category';
 import Loading from '../../Shared/Loading/Loading'
+import { styles } from '../../../styles';
 const Categories = () => {
     const { data: homes =[], isLoading } = useQuery({
 			queryKey: ["homes"],
@@ -21,7 +22,7 @@ const Categories = () => {
 
 				
 			<div>
-				<h1 className="text-4xl font-bold text-center text-[navy] my-8">All Category</h1>
+				<h1 className={`${styles.HomeHeadingText}`}>All Category</h1>
 				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-5 mb-5">
 					{homes?.map((home) => (
 						<Link key={home._id} to={`product/${home.brand}`}>

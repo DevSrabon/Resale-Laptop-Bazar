@@ -4,7 +4,7 @@ import { styles } from "../../../styles";
 import Loading from "../../Shared/Loading/Loading";
 
 const ReportedItems = () => {
-	const [reportUser, setReportUser] = useState([]);
+	const [reportedProduct, setReportedProduct] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [refetch, setRefetch] = useState(true);
 	useEffect(() => {
@@ -16,11 +16,12 @@ const ReportedItems = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				setLoading(false);
-				setReportUser(data);
+				setReportedProduct(data);
 			});
 	}, [refetch]);
 
-	const handleDeleteUser = (user) => {
+	const handleDeleteProduct = (user) => {
+		console.log(user._id)
 		fetch(`${process.env.REACT_APP_API_URL}/product/${user._id}`, {
 			method: "DELETE",
 			headers: {
@@ -43,7 +44,7 @@ const ReportedItems = () => {
 	return (
 		<div className="my-5">
 			<h2 className={`${styles.SectionHeadText}`}>
-				Manage reports: {reportUser?.length}
+				Manage reports: {reportedProduct?.length}
 			</h2>
 			<div className="overflow-x-auto mt-5">
 				<table className="table w-full">
@@ -57,17 +58,17 @@ const ReportedItems = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{reportUser?.map((user, i) => (
-							<tr key={user._id}>
+						{reportedProduct?.map((reportItem, i) => (
+							<tr key={reportItem._id}>
 								<th>{i + 1}</th>
-								<td>{user?.name}</td>
-								<td>{user?.email}</td>
-								<td>{user?.model}</td>
+								<td>{reportItem?.name}</td>
+								<td>{reportItem?.email}</td>
+								<td>{reportItem?.model}</td>
 
 								<td>
-									{user?.report && (
+									{reportItem?.report && (
 										<button
-											onClick={() => handleDeleteUser(user)}
+											onClick={() => handleDeleteProduct(reportItem)}
 											className="btn btn-sm btn-danger text-white">
 											Delete
 										</button>

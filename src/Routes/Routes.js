@@ -14,6 +14,7 @@ import Products from "../pages/Products/Products";
 import Page404 from "../pages/Shared/Page404/Page404";
 import SignUp from "../pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
 import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoute";
 
@@ -64,7 +65,9 @@ export const router = createBrowserRouter([
 				path: "/dashboard",
 				element: (
 					<PrivateRoute>
+						<BuyerRoute>
 						<Dashboard />
+						</BuyerRoute>
 					</PrivateRoute>
 				),
 			},

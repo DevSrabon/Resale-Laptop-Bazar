@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './Routes/Routes';
 function App() {
   return (
-		<div className="w-11/12 mx-auto">
+		<div>
 			<RouterProvider router={router}></RouterProvider>
 			<Toaster></Toaster>
 		</div>

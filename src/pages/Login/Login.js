@@ -39,6 +39,7 @@ const Login = () => {
 			})
 			.catch((error) => {
 				setLoginError(error.message);
+				setLoading(false);
 			});
 	};
 	const handleGoogleSignIn = () => {
@@ -49,9 +50,13 @@ const Login = () => {
 				setLoginUserEmail(user.email)
 				savedUser(user.displayName, user.email, 'Buyer')
 				toast.success("Login Success");
+				setLoading(false);
 
 			})
-			.catch(error => setLoginError(error.message));
+			.catch(error => {
+				setLoginError(error.message);
+				setLoading(false);
+			});
 	};
 	const savedUser = (name, email, role) => {
 		const user = { name, email, role };

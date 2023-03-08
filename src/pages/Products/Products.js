@@ -29,10 +29,10 @@ const Products = () => {
 	}
 
 	return (
-		<div>
+		<div className="mb-10">
 			<h4 className={`${styles.SectionHeadText}`}>{products[0].brand}</h4>
 
-			<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4 mb-5">
+			<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-10 md:mb-10">
 				{products.length > 0 &&
 					products?.map((product) => (
 						<ProductCard

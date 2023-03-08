@@ -1,15 +1,10 @@
-import React, { useContext } from 'react';
-import toast from 'react-hot-toast';
-import { AuthContext } from '../../contexts/AuthProvider';
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { AuthContext } from "../../contexts/AuthProvider";
 
-const BookingModal = ({ modal,  setModal }) => {
-    const { user } = useContext(AuthContext);
-    const {	
-			brand,
-			resellPrice,
-		model,
-			_id,
-		} = modal;
+const BookingModal = ({ modal, setModal }) => {
+	const { user } = useContext(AuthContext);
+	const { brand, resellPrice, model, _id } = modal;
 
 	const handleBooking = (e) => {
 		e.preventDefault();
@@ -26,7 +21,7 @@ const BookingModal = ({ modal,  setModal }) => {
 			price,
 			email,
 			phone,
-            model,
+			model,
 			location,
 		};
 		fetch(`${process.env.REACT_APP_API_URL}/bookings`, {
@@ -38,8 +33,8 @@ const BookingModal = ({ modal,  setModal }) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-                if (data.acknowledged) {
-                    setModal(null)
+				if (data.acknowledged) {
+					setModal(null);
 					toast.success("Booking Confirm");
 				} else {
 					toast.error(data.message);
@@ -116,4 +111,4 @@ const BookingModal = ({ modal,  setModal }) => {
 	);
 };
 
-export default BookingModal;
+export default BookingModal

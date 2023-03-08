@@ -68,7 +68,7 @@ const [isBuyer] = useBuyer(user?.email);
 						Laptop Bazar
 					</Link>
 				</div>
-				<div className="navbar-center hidden  font-bold lg:flex">
+				<div className="navbar-end hidden  font-bold lg:flex">
 					<ul className="menu menu-horizontal p-0 text-[#2d2d9a]">
 						{menuItems}
 					</ul>

@@ -1,6 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
-import PrimaryButton from "../../Shared/PrimaryButton/PrimaryButton";
 
 const CheckoutForm = ({ booking }) => {
 	const [cardError, setCardError] = useState("");
@@ -18,14 +17,25 @@ const CheckoutForm = ({ booking }) => {
 			},
 			body: JSON.stringify({ price }),
 		})
-			.then((res) => res.json())
-			.then((data) => setClientSecret(data.clientSecret));
+		.then((res) => res.json())
+		.then((data) => setClientSecret(data.clientSecret));
 	}, [price]);
-
+	
 	const stripe = useStripe();
 	const elements = useElements();
+	const handleDelete = () => {
+		fetch(`${process.env.REACT_APP_API_URL}/product/${pId}`, {
+			method: "DELETE",
+			headers: {
+				authorization: `bearer ${localStorage.getItem("accessToken")}`,
+			},
+		})
+			.then((res) => res.json())
+			.then((data) => { });
+	};
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		setProcessing(true);
 
 		if (!stripe || !elements) {
 			return;
@@ -46,7 +56,6 @@ const CheckoutForm = ({ booking }) => {
 			setCardError("");
 		}
 		setSuccess("");
-		setProcessing(true);
 		const { paymentIntent, error: confirmError } =
 			await stripe.confirmCardPayment(clientSecret, {
 				payment_method: {
@@ -64,6 +73,7 @@ const CheckoutForm = ({ booking }) => {
 		if (paymentIntent.status === "succeeded") {
 			setSuccess("Congrates ! Your payment successfully");
 			setTransactionId(paymentIntent.id);
+			handleDelete();
 			const payments = {
 				price,
 				transactionId: paymentIntent.id,
@@ -83,13 +93,16 @@ const CheckoutForm = ({ booking }) => {
 				.then((res) => res.json())
 				.then((data) => {
 					if (data.insertedId) {
+						
 						setSuccess("Congrates ! Your payment successfully");
 						setTransactionId(paymentIntent.id);
+						setProcessing(false);
+
 					}
 				});
 		}
-		setProcessing(false);
 	};
+
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
