@@ -70,7 +70,7 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 	}
 
 	return (
-		<div className="max-w-lg rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100 transition-all duration-700 ease-in-out hover:scale-105">
+		<div className="max-w-lg rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100 transition-all duration-700 ease-in-out hover:scale-105 h-[800px] relative">
 			<div className="geeks">
 				<img
 					src={image}
@@ -79,7 +79,7 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 				/>
 			</div>
 			<div
-				className="flex flex-col justify-between px-6 
+				className="flex flex-col justify-around px-6 
 			 py-3 space-y-4">
 				<div>
 					<h2 className="text-2xl font-semibold tracking-wide">{model}</h2>
@@ -87,18 +87,32 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 						Posted on {moment(date).fromNow()}, {location}
 					</small>
 					<hr />
+					<div className="flex justify-between items-center">
+						<div>
 					<p className="font-semibold text-[navy] text-xl">${resellPrice}</p>
-					<p>
-						For sale by{" "}
-						<span className="font-semibold">
-							{capitalizeWord}
-							{userData?.isVerified && (
-								<span className="text-blue-900 ">
-									<MdVerified className="inline" />
-								</span>
+
+						<p>
+							For sale by{" "}
+							<span className="font-semibold">
+								{capitalizeWord}
+								{userData?.isVerified && (
+									<span className="text-blue-900 ">
+										<MdVerified className="inline" />
+									</span>
+								)}
+							</span>
+						</p>
+						</div>
+						<div>
+							{isBuyer && !report && (
+								<button
+									className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-1 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer"
+									onClick={() => handleReport(_id)}>
+									Report
+								</button>
 							)}
-						</span>
-					</p>
+						</div>
+					</div>
 					<div className="grid grid-cols-2 mt-3">
 						<p>Condition:</p>
 						<p>{condition}</p>
@@ -132,22 +146,14 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 						<p>{description}</p>
 					</div>
 				</div>
-				<div className="flex justify-between items-center w-full">
+				<div className="flex text-center items-center w-11/12 absolute bottom-5  footer">
 					{isBuyer && (
 						<label
 							onClick={() => setModal(advertise)}
-							className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer"
+							className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer w-full grid justify-center items-center"
 							htmlFor="booking-modal">
 							Book Now
 						</label>
-					)}
-
-					{isBuyer && !report && (
-						<button
-							className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer"
-							onClick={() => handleReport(_id)}>
-							Report
-						</button>
 					)}
 				</div>
 			</div>

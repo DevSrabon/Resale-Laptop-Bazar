@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout/DashboadrdLayout";
 import Main from "../layout/Main/Main";
+import AddCategory from "../pages/Dashboard/Add Category/AddCategory";
 import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
@@ -100,6 +101,14 @@ export const router = createBrowserRouter([
 				element: (
 					<AdminRoute>
 						<ReportedItems />
+					</AdminRoute>
+				),
+			},
+			{
+				path: "/dashboard/addCategories",
+				element: (
+					<AdminRoute>
+						<AddCategory />
 					</AdminRoute>
 				),
 			},

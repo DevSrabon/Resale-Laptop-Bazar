@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { styles } from "../../../styles";
 import BookingModal from "../../Products/BookingModal";
@@ -5,18 +6,16 @@ import Loading from "../../Shared/Loading/Loading";
 import Advertise from "./Advertise";
 
 const Advertises = () => {
-	const [advertises, setAdvertises] = useState([]);
-	const [loading, setLoading,] = useState(true);
-	useEffect(() => {
-		fetch(`${process.env.REACT_APP_API_URL}/products?advertise=true`)
-			.then((res) => res.json())
-			.then((data) => {
-				setAdvertises(data);
-				setLoading(false);
-			});
-	}, []);
+	 const { data: advertises = [], refetch , isLoading} = useQuery({
+			queryKey: ["products", "advertise"],
+			queryFn: async () => {
+				const res = fetch(`${process.env.REACT_APP_API_URL}/products?advertise=true`);
+				const data = (await res).json();
+				return data;
+			},
+		});
 const [modal, setModal] = useState("");
-	if (loading) {
+	if (isLoading) {
 		return <Loading />;
 	}
 	return (
@@ -29,7 +28,7 @@ const [modal, setModal] = useState("");
 					<Advertise
 						key={advertise._id}
 						setModal={setModal}
-						advertise={advertise}></Advertise>
+						advertise={advertise} refetch={refetch}></Advertise>
 				))}
 			</div>
 			{modal && (

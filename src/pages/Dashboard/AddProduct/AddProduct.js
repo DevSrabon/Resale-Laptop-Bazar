@@ -17,7 +17,6 @@ const AddProduct = () => {
 	} = useForm();
 const [loading, setLoading] = useState(false)
 	const imageHostKey = process.env.REACT_APP_imgbb_key;
-	const navigate = useNavigate();
 
 	const date = new Date();
 
@@ -99,6 +98,15 @@ const [loading, setLoading] = useState(false)
 							type="text"
 							{...register("model", {
 								required: "Model is required",
+								minLength: {
+									value: 3,
+									message: "Model Should be 3 character or longer",
+								},
+								maxLength: {
+									value: 50,
+									message:
+										"Model Should not be more than 60 character or longer",
+								},
 							})}
 						/>
 						{errors.model && (
@@ -161,11 +169,20 @@ const [loading, setLoading] = useState(false)
 							className="textarea textarea-bordered textarea-lg  w-full"
 							type="text"
 							{...register("description", {
-								required: "Year of purchase is required",
+								required: "Description is required",
+								minLength: {
+									value: 30,
+									message: "Description Should be 30 character or longer",
+								},
+								maxLength: {
+									value: 85,
+									message:
+										"Description Should not be more than 85 character or longer",
+								},
 							})}
 						/>
-						{errors.purchase && (
-							<p className="text-red-600">{errors.purchase?.message}</p>
+						{errors.description && (
+							<p className="text-red-600">{errors.description?.message}</p>
 						)}
 					</div>
 				</div>
@@ -227,6 +244,11 @@ const [loading, setLoading] = useState(false)
 									value: 11,
 									message: "Number Should be 11 character or longer",
 								},
+								maxLength: {
+									value: 16,
+									message:
+										"Number Should not be more than 16 character or longer",
+								},
 							})}
 						/>
 						{errors.phone && (
@@ -248,7 +270,10 @@ const [loading, setLoading] = useState(false)
 							<p className="text-red-600">{errors.img?.message}</p>
 						)}
 					</div>
-					<PrimaryButton disabled={loading} classes={"w-full mt-3"} type={"submit"}>
+					<PrimaryButton
+						disabled={loading}
+						classes={"w-full mt-3"}
+						type={"submit"}>
 						{loading ? <SmallSpinner /> : "Add Product"}
 					</PrimaryButton>
 				</div>

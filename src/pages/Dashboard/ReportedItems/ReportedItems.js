@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { styles } from "../../../styles";
 import Loading from "../../Shared/Loading/Loading";
 
@@ -47,13 +48,15 @@ const ReportedItems = () => {
 				Manage reports: {reportedProduct?.length}
 			</h2>
 			<div className="overflow-x-auto mt-5">
-				<table className="table w-full">
-					<thead>
+				<table className="table w-full ">
+					<thead >
 						<tr>
 							<th></th>
 							<th>Name</th>
 							<th>Email</th>
+							<th>Item Image</th>
 							<th>Item Name</th>
+							<th>Item Details</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -63,7 +66,17 @@ const ReportedItems = () => {
 								<th>{i + 1}</th>
 								<td>{reportItem?.name}</td>
 								<td>{reportItem?.email}</td>
+								<td>
+									<img src={reportItem?.image} className="w-10" alt="" />
+								</td>
 								<td>{reportItem?.model}</td>
+								<td>
+									<Link
+										to={`/product/${reportItem.brand}`}
+										className="btn btn-sm btn-danger text-white">
+										Details
+									</Link>
+								</td>
 
 								<td>
 									{reportItem?.report && (
