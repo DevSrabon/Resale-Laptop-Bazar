@@ -43,21 +43,29 @@ const MyProducts = () => {
 			});
 	};
 	return (
-		<div>
-			<h4 className={`${styles.SectionHeadText}`}>My Products</h4>
+		<>
+			{products.length ? (
+				<div>
+					<h4 className={`${styles.SectionHeadText}`}>My Products</h4>
 
-			<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
-				{products?.map((product) => (
-					<MyProductCard
-						key={product._id}
-						isLoading={isLoading}
-						refetch={refetch}
-						handleAdvertise={handleAdvertise}
-						product={product}
-					/>
-				))}
-			</div>
-		</div>
+					<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
+						{products?.map((product) => (
+							<MyProductCard
+								key={product._id}
+								isLoading={isLoading}
+								refetch={refetch}
+								handleAdvertise={handleAdvertise}
+								product={product}
+							/>
+						))}
+					</div>
+				</div>
+			) : (
+				<h3 className="text-center h-[100vh] flex items-center justify-center text-2xl font-bold">
+					You have no product. Please add a Product.
+				</h3>
+			)}
+		</>
 	);
 };
 

@@ -123,7 +123,7 @@ const CheckoutForm = ({ booking }) => {
 					}}
 				/>
 				<button
-					className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-4 cursor-pointer py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 mt-5"
+					className="bg-[green] text-white active:bg-pink-600 font-bold uppercase text-sm px-4 cursor-pointer py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 mt-5"
 					type="submit"
 					disabled={!stripe || !clientSecret || processing}>
 					Pay

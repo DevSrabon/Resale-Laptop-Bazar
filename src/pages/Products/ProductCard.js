@@ -8,6 +8,8 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Shared/Loading/Loading";
 import './styles.css'
+import { Link } from "react-router-dom";
+import PrimaryButton from "../Shared/PrimaryButton/PrimaryButton";
 const ProductCard = ({ product, setModal, refetch }) => {
 	const { user } = useContext(AuthContext);
 	const {
@@ -29,24 +31,20 @@ const ProductCard = ({ product, setModal, refetch }) => {
 	const firstLetter = name.charAt(0).toUpperCase();
 	const remainingLetter = name.slice(1);
 	const capitalizeWord = firstLetter + remainingLetter;
-	console.log(capitalizeWord);
-	const [isBuyer] = useBuyer(user?.email)
+	const [isBuyer] = useBuyer(user?.email);
 
 	const [userData, setUserData] = useState({});
-const {
-	data: loadUserData = [],
-	isLoading,
-} = useQuery({
-	queryKey: ["users"],
-	queryFn: async () => {
-		const res = await fetch(`${process.env.REACT_APP_API_URL}/users`);
-		const data = await res.json();
-		return data;
-	},
-});
-	
+	const { data: loadUserData = [], isLoading } = useQuery({
+		queryKey: ["users"],
+		queryFn: async () => {
+			const res = await fetch(`${process.env.REACT_APP_API_URL}/users`);
+			const data = await res.json();
+			return data;
+		},
+	});
+
 	useEffect(() => {
-		const data = (loadUserData.find(e => e.email === email) )
+		const data = loadUserData.find((e) => e.email === email);
 		setUserData(data);
 	}, [email, loadUserData]);
 
@@ -60,13 +58,13 @@ const {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.modifiedCount > 0) {
-					refetch()
+					refetch();
 					toast.success("Reported successful.");
 				}
 			});
 	};
 	if (isLoading) {
-		return <Spinner/>
+		return <Spinner />;
 	}
 
 	return (
@@ -89,7 +87,7 @@ const {
 					<hr />
 					<div className="flex justify-between items-center">
 						<div>
-							<p className="font-semibold text-[navy] text-xl">
+							<p className="font-semibold text-[green] text-xl">
 								${resellPrice}
 							</p>
 
@@ -108,7 +106,7 @@ const {
 						<div>
 							{isBuyer && !report && (
 								<button
-									className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-1 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer"
+									className="bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-6 py-1 rounded shadow mr-1 mb-1 cursor-pointer"
 									onClick={() => handleReport(_id)}>
 									Report
 								</button>
@@ -149,13 +147,17 @@ const {
 					</div>
 				</div>
 				<div className="flex text-center items-center w-11/12 absolute bottom-5  footer">
-					{isBuyer && (
+					{isBuyer ? (
 						<label
 							onClick={() => setModal(product)}
-							className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer w-full grid justify-center items-center"
+							className="bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-6 py-3 rounded shadow mr-1 mb-1 cursor-pointer w-full grid justify-center items-center"
 							htmlFor="booking-modal">
 							Book Now
 						</label>
+					) : (
+						<Link onClick={() => setModal(product)} to={"/login"}>
+							<PrimaryButton>Please Login As A Buyer</PrimaryButton>
+						</Link>
 					)}
 				</div>
 			</div>

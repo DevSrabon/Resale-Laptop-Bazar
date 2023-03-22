@@ -13,7 +13,8 @@ const Login = () => {
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-	const { signIn, googleLogin, setLoading, loading } = useContext(AuthContext);
+	const { signIn, googleLogin, setLoading, loading, } =
+		useContext(AuthContext);
 	const [loginError, setLoginError] = useState("");
 	const [loginUserEmail, setLoginUserEmail] = useState("");
 	const [token] = useToken(loginUserEmail);
@@ -72,14 +73,13 @@ const Login = () => {
 				setLoginUserEmail(email);
 			});
 	};
-
 	return (
 		<div className="h-[800px] flex justify-center items-center ">
 			<div className="w-96 p-7 shadow-2xl">
 				<span className="flex justify-center">
-					<BiUserCircle className="text-8xl text-[navy]" />
+					<BiUserCircle className="text-8xl text-[green]" />
 				</span>
-				<h2 className="text-xl font-bold text-center text-[navy]">Login</h2>
+				<h2 className="text-xl font-bold text-center text-[green]">Login</h2>
 				<form onSubmit={handleSubmit(handleLogin)}>
 					<div className="form-control w-full max-w-xs">
 						<label className="label">
@@ -118,19 +118,23 @@ const Login = () => {
 							<span className="label-text">Forget password</span>
 						</label>
 					</div>
-					<PrimaryButton disabled={loading} type={"submit"} classes ={"w-full"}>{loading ? <SmallSpinner /> : 'Login'}</PrimaryButton>
+					<PrimaryButton disabled={loading} type={"submit"} classes={"w-full"}>
+						{loading ? <SmallSpinner /> : "Login"}
+					</PrimaryButton>
 					<div>
 						{loginError && <p className="text-red-600">{loginError}</p>}
 					</div>
 				</form>
 				<p className="mt-3 text-center">
 					New to Doctors Portal{" "}
-					<Link className="text-secondary" to="/signup">
+					<Link className="text-green-500" to="/signup">
 						Create new account
 					</Link>
 				</p>
 				<div className="divider text-stone-400">OR</div>
-				<button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
+				<button
+					onClick={handleGoogleSignIn}
+					className="btn btn-outline hover:bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] w-full">
 					CONTINUE WITH GOOGLE
 				</button>
 			</div>

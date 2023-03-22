@@ -25,47 +25,56 @@ const Dashboard = () => {
 	return (
 		<>
 			{isBuyer && (
-				<section>
-					<h3 className={`${styles.SectionHeadText}`}>My Booking</h3>
-					<div className="overflow-x-auto">
-						<table className="table w-full">
-							<thead>
-								<tr>
-									<th>SL.</th>
-									<th>Model</th>
-									<th>Phone</th>
-									<th>Price</th>
-									<th>Location</th>
-									<th>Payment</th>
-								</tr>
-							</thead>
-							<tbody>
-								{bookings &&
-									bookings?.map((booking, i) => (
-										<tr key={booking._id}>
-											<th>{i + 1}</th>
-											<td>{booking.model}</td>
-											<td>{booking.phone}</td>
-											<td>{booking.price}</td>
-											<td>{booking.location}</td>
-											<td>
-												{booking?.price && !booking.paid && (
-													<Link to={`/dashboard/payment/${booking._id}`}>
-														<button className="btn btn-primary btn-sm">
-															Pay
-														</button>
-													</Link>
-												)}
-												{booking.price && booking.paid && (
-													<span className="text-accent">Paid</span>
-												)}
-											</td>
-										</tr>
-									))}
-							</tbody>
-						</table>
-					</div>
-				</section>
+				<>
+					{bookings.length ? (
+						<>
+							<section>
+								<h3 className={`${styles.SectionHeadText}`}>My Booking</h3>
+								<div className="overflow-x-auto">
+									<table className="table w-full">
+										<thead>
+											<tr>
+												<th>SL.</th>
+												<th>Model</th>
+												<th>Phone</th>
+												<th>Price</th>
+												<th>Location</th>
+												<th>Payment</th>
+											</tr>
+										</thead>
+										<tbody>
+											{bookings?.map((booking, i) => (
+												<tr key={booking._id}>
+													<th>{i + 1}</th>
+													<td>{booking.model}</td>
+													<td>{booking.phone}</td>
+													<td>{booking.price}</td>
+													<td>{booking.location}</td>
+													<td>
+														{booking?.price && !booking.paid && (
+															<Link to={`/dashboard/payment/${booking._id}`}>
+																<button className="btn btn-primary btn-sm">
+																	Pay
+																</button>
+															</Link>
+														)}
+														{booking.price && booking.paid && (
+															<span className="text-accent">Paid</span>
+														)}
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
+							</section>
+						</>
+					) : (
+						<h3 className="text-center h-[100vh] flex items-center justify-center text-2xl font-bold">
+							You have no booked product
+						</h3>
+					)}
+				</>
 			)}
 		</>
 	);

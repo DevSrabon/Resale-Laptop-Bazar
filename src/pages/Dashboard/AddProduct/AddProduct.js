@@ -81,7 +81,7 @@ const [loading, setLoading] = useState(false)
 	}
 	return (
 		<div className=" p-7 my-10">
-			<h3 className="text-3xl text-center font-semibold text-[navy]">
+			<h3 className="text-3xl text-center font-semibold text-[green]">
 				{" "}
 				Sell A Laptop
 			</h3>

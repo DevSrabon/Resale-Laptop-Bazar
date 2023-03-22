@@ -2,7 +2,7 @@ import React from "react";
 
 const FAQ = () => {
 	return (
-		<div className="p-4 max-w-lg rounded-lg border border-gray-200 shadow-lg sm:p-6 md:p-8 bg-[navy] w-3/4 mx-auto my-20">
+		<div className="p-4 max-w-lg rounded-lg border border-gray-200 shadow-lg sm:p-6 md:p-8 bg-[green] w-3/4 mx-auto my-20">
 			<div
 				tabIndex={0}
 				className="collapse collapse-plus border border-base-300 bg-green-400 text-white rounded-box">

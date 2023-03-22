@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider";
+import PrimaryButton from "../Shared/PrimaryButton/PrimaryButton";
 
 const BookingModal = ({ modal, setModal }) => {
 	const { user } = useContext(AuthContext);
@@ -97,13 +98,13 @@ const BookingModal = ({ modal, setModal }) => {
 							placeholder="Your Location"
 							className="input input-bordered w-full"
 						/>
-
+						<PrimaryButton>
 						<input
 							htmlFor="booking-modal"
-							className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full"
 							type="submit"
 							value="Submit"
 						/>
+</PrimaryButton>
 					</form>
 				</div>
 			</div>

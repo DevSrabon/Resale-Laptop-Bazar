@@ -7,7 +7,7 @@ import useSeller from '../../../hooks/useSeller';
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const { user, logOut } = useContext(AuthContext);
+	const { user, logOut} = useContext(AuthContext);
 const [isAdmin] = useAdmin(user?.email);
 const [isSeller] = useSeller(user?.email);
 const [isBuyer] = useBuyer(user?.email);
@@ -17,6 +17,7 @@ const [isBuyer] = useBuyer(user?.email);
 		})
 		.catch((err) => console.log(err));
 	};
+
     const menuItems = (
 			<>
 				<li>
@@ -40,14 +41,17 @@ const [isBuyer] = useBuyer(user?.email);
 					</li>
 				)}
 			</>
-		);
+	);
+		
     return (
-			<nav className="navbar bg-base-100 flex justify-between">
+			<nav
+				className={`bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a]
+				 navbar flex flex-row justify-between items-center h-[7vh]  duration-200 ease-out text-white sticky top-[0vh] z-50`}>
 				<div className="navbar-start">
 					<label
 						htmlFor="dashboard-drawer"
 						tabIndex={2}
-						className="btn btn-ghost lg:hidden bg-white">
+						className="btn btn-ghost lg:hidden">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							className="h-5 w-5"
@@ -64,12 +68,13 @@ const [isBuyer] = useBuyer(user?.email);
 					</label>
 					<Link
 						to="/"
-						className="btn btn-ghost normal-case text-[#2d2d9a] text-3xl font-bold">
+						className={` text-[#57da28]
+						 btn btn-ghost normal-case  text-3xl font-bold`}>
 						Laptop Bazar
 					</Link>
 				</div>
 				<div className="navbar-end hidden  font-bold lg:flex">
-					<ul className="menu menu-horizontal p-0 text-[#2d2d9a]">
+					<ul className={`menu menu-horizontal p-0 text-white`}>
 						{menuItems}
 					</ul>
 				</div>
@@ -96,7 +101,8 @@ const [isBuyer] = useBuyer(user?.email);
 						<ul
 							onClick={() => setIsOpen(!isOpen)}
 							tabIndex={1}
-							className="menu menu-compact dropdown-content shadow bg-base-100 rounded-lg w-52 absolute right-0 top-14">
+							className={`text-[#3cc20a]
+							 menu menu-compact dropdown-content shadow bg-base-100 rounded-lg w-52 absolute right-0 top-14`}>
 							{menuItems}
 						</ul>
 					)}

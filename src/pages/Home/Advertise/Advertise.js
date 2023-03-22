@@ -10,9 +10,10 @@ import "../../Products/styles.css";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import useBuyer from "../../../hooks/useBuyer";
 import Spinner from "../../Shared/Loading/Loading";
+import { Link } from "react-router-dom";
 
 const Advertise = ({ advertise, setModal, refetch }) => {
-	const { user } = useContext(AuthContext);
+	const { user, logOut } = useContext(AuthContext);
 	const {
 		_id,
 		name,
@@ -32,7 +33,6 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 	const firstLetter = name.charAt(0).toUpperCase();
 	const remainingLetter = name.slice(1);
 	const capitalizeWord = firstLetter + remainingLetter;
-	console.log(capitalizeWord);
 	const [isBuyer] = useBuyer(user?.email);
 
 	const [userData, setUserData] = useState({});
@@ -65,6 +65,11 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 				}
 			});
 	};
+	const handleLogOut = () => {
+		logOut()
+			.then(() => {})
+			.catch((err) => console.log(err));
+	};
 	if (isLoading) {
 		return <Spinner />;
 	}
@@ -89,24 +94,26 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 					<hr />
 					<div className="flex justify-between items-center">
 						<div>
-					<p className="font-semibold text-[navy] text-xl">${resellPrice}</p>
+							<p className="font-semibold text-[green] text-xl">
+								${resellPrice}
+							</p>
 
-						<p>
-							For sale by{" "}
-							<span className="font-semibold">
-								{capitalizeWord}
-								{userData?.isVerified && (
-									<span className="text-blue-900 ">
-										<MdVerified className="inline" />
-									</span>
-								)}
-							</span>
-						</p>
+							<p>
+								For sale by{" "}
+								<span className="font-semibold">
+									{capitalizeWord}
+									{userData?.isVerified && (
+										<span className="text-blue-900 ">
+											<MdVerified className="inline" />
+										</span>
+									)}
+								</span>
+							</p>
 						</div>
 						<div>
 							{isBuyer && !report && (
 								<button
-									className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-1 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer"
+									className="bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-6 py-1 rounded shadow mr-1 mb-1 cursor-pointer"
 									onClick={() => handleReport(_id)}>
 									Report
 								</button>
@@ -147,13 +154,32 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 					</div>
 				</div>
 				<div className="flex text-center items-center w-11/12 absolute bottom-5  footer">
-					{isBuyer && (
-						<label
-							onClick={() => setModal(advertise)}
-							className="bg-[navy] text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-2xl hover:bg-[#010144] outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 cursor-pointer w-full grid justify-center items-center"
-							htmlFor="booking-modal">
-							Book Now
-						</label>
+					{user?.email ? (
+						<>
+							{isBuyer ? (
+								<label
+									onClick={() => setModal(advertise)}
+									className="bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-6 py-3 rounded shadow mr-1 mb-1 cursor-pointer w-full grid justify-center items-center"
+									htmlFor="booking-modal">
+									Book Now
+								</label>
+							) : (
+								<Link
+									onClick={handleLogOut}
+									className="bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-6 py-3 rounded shadow mr-1 mb-1 cursor-pointer w-full grid justify-center items-center"
+									to={"/login"}>
+									Please Login As A Buyer
+								</Link>
+							)}
+						</>
+					) : (
+						<>
+							<Link
+								className="bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-6 py-3 rounded shadow mr-1 mb-1 cursor-pointer w-full grid justify-center items-center"
+								to={"/login"}>
+								Please Login
+							</Link>
+						</>
 					)}
 				</div>
 			</div>

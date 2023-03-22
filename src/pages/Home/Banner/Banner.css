@@ -1,17 +1,20 @@
     .banner {
         position: relative;
+        background-image: url(https://wallpaper.dog/large/5549717.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: 1;
     }
 
-    .banner::after {
+    .banner::before {
         content: "";
-        background-image: url('../../../assets/banner.webp');
-        border-radius: 10px;
-        background-size: cover;
+    background: linear-gradient(263deg, #3cc20a, rgba(18, 1, 1, 1) 74%, rgba(13, 6, 5, 1) 95%);
+        
         position: absolute;
         top: 0px;
         right: 0px;
         bottom: 0px;
         left: 0px;
-        opacity: 0.4;
-        z-index: -1;
+        opacity: 0.9;
+        z-index: -8;
     }

@@ -8,9 +8,11 @@ import useToken from "../../hooks/useToken";
 import SmallSpinner from "../Shared/Loading/SmaillSpinner";
 import PrimaryButton from "../Shared/PrimaryButton/PrimaryButton";
 const SignUp = () => {
-	const { createUser, updateUser, loading } = useContext(AuthContext);
+	const { createUser, updateUser, loading, setLoading} =
+		useContext(AuthContext);
 	const [createdUserEmail, setCreatedUserEmail] = useState("");
 	const [token] = useToken(createdUserEmail);
+
 	const {
 		register,
 		formState: { errors },
@@ -20,30 +22,10 @@ const SignUp = () => {
 
 	if (token) {
 		navigate("/");
+		window.location.reload();
 	}
 
 	const [signUError, setSignUpError] = useState(true);
-	const handleSignUp = (data) => {
-		setSignUpError("");
-		createUser(data.email, data.password)
-			.then((result) => {
-				const user = result.user;
-				toast("User Created Successfully");
-				const userInfo = {
-					displayName: data.name,
-				};
-				setTimeout(() => {
-					updateUser(userInfo)
-						.then(() => {
-							savedUser(data.name, data.email, data.role);
-						})
-						.catch((err) => console.error(err));
-				}, 100);
-			})
-			.catch((err) => {
-				setSignUpError(err.message);
-			});
-	};
 
 	const savedUser = (name, email, role) => {
 		const user = { name, email, role };
@@ -59,14 +41,36 @@ const SignUp = () => {
 				setCreatedUserEmail(email);
 			});
 	};
+	
+	const handleSignUp = (data) => {
+		setSignUpError("");
+		createUser(data.email, data.password)
+			.then((result) => {
+				const user = result.user;
+				toast("User Created Successfully");
+				const userInfo = {
+					displayName: data.name,
+				};
+				updateUser(userInfo)
+					.then(() => {
+						savedUser(data.name, data.email, data.role);
+						setLoading(false);
+					})
+					.catch((err) => console.error(err));
+			})
+			.catch((err) => {
+				setSignUpError(err.message);
+				setLoading(false);
+			});
+	};
 
 	return (
 		<div className="h-[800px] flex justify-center items-center ">
 			<div className="w-96 p-7 shadow-2xl">
 				<span className="flex justify-center">
-					<BiUserCircle className="text-8xl text-[navy]" />
+					<BiUserCircle className="text-8xl text-[green]" />
 				</span>
-				<h2 className="text-xl font-bold text-center text-[navy]">Sign Up</h2>
+				<h2 className="text-xl font-bold text-center text-[green]">Sign Up</h2>
 				<form onSubmit={handleSubmit(handleSignUp)}>
 					<div className="form-control w-full max-w-xs">
 						<label className="label">
@@ -126,18 +130,21 @@ const SignUp = () => {
 								required: "Role is required",
 							})}
 							className="select input-bordered w-full max-w-xs">
-							<option value="Seller">Seller</option>
 							<option value="Buyer">Buyer</option>
+							<option value="Seller">Seller</option>
 						</select>
 					</div>
-					<PrimaryButton disabled={loading} type={"submit"} classes={"w-full mt-3"}>
-						{loading ? <SmallSpinner /> : "Login"}
+					<PrimaryButton
+						disabled={loading}
+						type={"submit"}
+						classes={"w-full mt-3"}>
+						{loading ? <SmallSpinner /> : "Sign up"}
 					</PrimaryButton>
 					{signUError && <p>{signUError}</p>}
 				</form>
 				<p className="mt-3 text-center">
 					Already have an account?{" "}
-					<Link className="text-secondary " to="/login">
+					<Link className="text-green-500 " to="/login">
 						Please login
 					</Link>
 				</p>
