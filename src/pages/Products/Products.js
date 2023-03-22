@@ -29,24 +29,32 @@ const Products = () => {
 	}
 
 	return (
-		<div className="mb-10">
-			<h4 className={`${styles.SectionHeadText}`}>{products[0].brand}</h4>
+		<>
+			{products.length ? (
+				<div className="mb-10 px-2">
+					<h4 className={`${styles.SectionHeadText}`}>{products[0].brand}</h4>
 
-			<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-10 md:mb-10">
-				{products.length > 0 &&
-					products?.map((product) => (
-						<ProductCard
-							key={product._id}
-							product={product}
-							setModal={setModal}
-							refetch={refetch}
-						/>
-					))}
-			</div>
-			{modal && (
-				<BookingModal key={modal._id} setModal={setModal} modal={modal} />
+					<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-10 md:mb-10">
+						{products.length > 0 &&
+							products?.map((product) => (
+								<ProductCard
+									key={product._id}
+									product={product}
+									setModal={setModal}
+									refetch={refetch}
+								/>
+							))}
+					</div>
+					{modal && (
+						<BookingModal key={modal._id} setModal={setModal} modal={modal} />
+					)}
+				</div>
+			) : (
+				<h3 className="text-center h-[100vh] flex items-center justify-center text-2xl font-bold">
+					No Product Found.
+				</h3>
 			)}
-		</div>
+		</>
 	);
 };
 

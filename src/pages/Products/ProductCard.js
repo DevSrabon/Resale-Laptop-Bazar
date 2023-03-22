@@ -9,9 +9,9 @@ import { useQuery } from "@tanstack/react-query";
 import Spinner from "../Shared/Loading/Loading";
 import './styles.css'
 import { Link } from "react-router-dom";
-import PrimaryButton from "../Shared/PrimaryButton/PrimaryButton";
+import { styles } from "../../styles";
 const ProductCard = ({ product, setModal, refetch }) => {
-	const { user } = useContext(AuthContext);
+	const { user, logOut } = useContext(AuthContext);
 	const {
 		_id,
 		name,
@@ -63,6 +63,11 @@ const ProductCard = ({ product, setModal, refetch }) => {
 				}
 			});
 	};
+		const handleLogOut = () => {
+			logOut()
+				.then(() => {})
+				.catch((err) => console.log(err));
+		};
 	if (isLoading) {
 		return <Spinner />;
 	}
@@ -135,28 +140,31 @@ const ProductCard = ({ product, setModal, refetch }) => {
 					</div>
 					<div className="grid grid-cols-2 ">
 						<p>Original Price:</p>
-						<p>{originalPrice}</p>
+						<p>${originalPrice}</p>
 					</div>
 					<div className="grid grid-cols-2 ">
 						<p>Resale Price:</p>
-						<p>{resellPrice}</p>
+						<p>${resellPrice}</p>
 					</div>
 					<div>
 						<p className="font-semibold">Description:</p>
 						<p>{description}</p>
 					</div>
 				</div>
-				<div className="flex text-center items-center w-11/12 absolute bottom-5  footer">
+				<div className="flex text-center items-center w-11/12 absolute bottom-0  footer">
 					{isBuyer ? (
 						<label
 							onClick={() => setModal(product)}
-							className="bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-6 py-3 rounded shadow mr-1 mb-1 cursor-pointer w-full grid justify-center items-center"
+							className={`${styles.BtnColor}`}
 							htmlFor="booking-modal">
 							Book Now
 						</label>
 					) : (
-						<Link onClick={() => setModal(product)} to={"/login"}>
-							<PrimaryButton>Please Login As A Buyer</PrimaryButton>
+						<Link
+							className={`${styles.BtnColor}`}
+							onClick={(() => setModal(product), handleLogOut)}
+							to={"/login"}>
+							Please Login As A Buyer
 						</Link>
 					)}
 				</div>

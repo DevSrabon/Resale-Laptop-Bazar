@@ -1,9 +1,15 @@
-import { Player } from "@lottiefiles/react-lottie-player";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider";
 import PrimaryButton from "../../Shared/PrimaryButton/PrimaryButton";
 import "./Banner.css";
 const Banner = () => {
+	const{logOut}=useContext(AuthContext)
+	const handleLogOut = () => {
+		logOut()
+			.then(() => {})
+			.catch((err) => console.log(err));
+	};
 	return (
 		<>
 			<section className=" banner">
@@ -14,15 +20,15 @@ const Banner = () => {
 						</h1>
 						<p className="mt-6 mb-4 text-lg text-justify text-white">
 							Looking for a high-quality, pre-owned laptop at an affordable
-							price? 
+							price?
 							<br className="hidden md:inline lg:hidden" />
 							You've come to the right place! At Laptop Resale Bazar, we offer a
 							wide selection of laptops from top brands like Acer, Dell, HP.
 						</p>
 						<div className="flex flex-col space-y-2 sm:items-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-							<Link to={"/login"}>
+							<Link to={"/login"} onClick={handleLogOut}>
 								{" "}
-								<PrimaryButton>Get Started</PrimaryButton>
+								<PrimaryButton>Login Now</PrimaryButton>
 							</Link>
 						</div>
 					</div>

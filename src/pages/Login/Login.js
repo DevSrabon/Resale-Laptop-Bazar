@@ -26,6 +26,7 @@ const Login = () => {
 	
 		if (token) {
 			navigate(from, { replace: true });
+			
 		}
 	}, [from, navigate, token])
 	
@@ -73,6 +74,9 @@ const Login = () => {
 				setLoginUserEmail(email);
 			});
 	};
+	if (token) {
+		return navigate("/")
+	}
 	return (
 		<div className="h-[800px] flex justify-center items-center ">
 			<div className="w-96 p-7 shadow-2xl">
@@ -80,6 +84,10 @@ const Login = () => {
 					<BiUserCircle className="text-8xl text-[green]" />
 				</span>
 				<h2 className="text-xl font-bold text-center text-[green]">Login</h2>
+				<div className="flex justify-center items-center flex-col">
+				<small>Admin: admin@gmail.com</small>
+				<small>Password: 112233</small>
+				</div>
 				<form onSubmit={handleSubmit(handleLogin)}>
 					<div className="form-control w-full max-w-xs">
 						<label className="label">
