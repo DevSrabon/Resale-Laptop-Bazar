@@ -22,7 +22,6 @@ const ReportedItems = () => {
 	}, [refetch]);
 
 	const handleDeleteProduct = (user) => {
-		console.log(user._id)
 		fetch(`${process.env.REACT_APP_API_URL}/product/${user._id}`, {
 			method: "DELETE",
 			headers: {
