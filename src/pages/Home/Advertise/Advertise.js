@@ -153,7 +153,7 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 						<p>{description}</p>
 					</div>
 				</div>
-				<div className="flex text-center items-center w-11/12 absolute bottom-5  footer">
+				<div className="flex text-center items-center w-11/12 absolute bottom-0  footer">
 					{user?.email ? (
 						<>
 							{isBuyer ? (
