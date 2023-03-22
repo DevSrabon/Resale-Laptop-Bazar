@@ -35,7 +35,7 @@ const Login = () => {
 		signIn(data.email, data.password)
 			.then((result) => {
 				const user = result.user;
-				setLoginUserEmail(data.email);
+				setLoginUserEmail(user.email);
 				setLoading(false)
 				toast.success('Login Success')
 			})
