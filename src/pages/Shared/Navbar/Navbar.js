@@ -4,7 +4,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import useAdmin from '../../../hooks/useAdmin';
 import useBuyer from '../../../hooks/useBuyer';
 import useSeller from '../../../hooks/useSeller';
-
+import "./Navbar.css"
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { user, logOut} = useContext(AuthContext);
@@ -45,7 +45,7 @@ const [isBuyer] = useBuyer(user?.email);
 		
     return (
 			<nav
-				className={`bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a]
+				className={`nav
 				 navbar flex flex-row justify-between items-center h-[7vh]  duration-200 ease-out text-white sticky top-[0vh] z-50`}>
 				<div className="navbar-start">
 					<label
@@ -68,15 +68,13 @@ const [isBuyer] = useBuyer(user?.email);
 					</label>
 					<Link
 						to="/"
-						className={` text-[#57da28]
-						 btn btn-ghost normal-case  text-3xl font-bold`}>
+						className={` text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600
+						 btn btn-ghost normal-case text-xl md:text-3xl font-bold`}>
 						Laptop Bazar
 					</Link>
 				</div>
 				<div className="navbar-end hidden  font-bold lg:flex">
-					<ul className={`menu menu-horizontal p-0 text-white`}>
-						{menuItems}
-					</ul>
+					<ul className={`menu menu-horizontal p-0 text-white`}>{menuItems}</ul>
 				</div>
 				<div className="dropdown relative">
 					<label

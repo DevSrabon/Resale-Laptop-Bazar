@@ -3,8 +3,8 @@ const styles = {
 	SectionHeadText: "text-3xl text-center font-semibold text-[green] my-5",
 	SectionSubText: "text-xl text-center font-semibold text-[green] mb-5",
 	BtnColor:
-		"bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-6 py-3 rounded shadow mr-1 mb-1 cursor-pointer w-full grid justify-center items-center",
+		"bg-gradient-to-r from-[#071904] to-[#276404] text-white  uppercase text-sm px-6 py-3 rounded shadow mr-1 mb-1 cursor-pointer w-full grid justify-center items-center",
 	SmallBtnColor:
-		"bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-1 py-1 rounded shadow mr-1 mb-1 cursor-pointer w-full grid justify-center items-center",
+		"bg-gradient-to-r from-[#071904] to-[#276404] text-white  uppercase text-sm px-1 py-1 rounded shadow mr-1 mb-1 cursor-pointer w-full grid justify-center items-center",
 };
 export { styles };
