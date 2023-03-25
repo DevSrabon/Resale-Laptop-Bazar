@@ -73,7 +73,7 @@ const ProductCard = ({ product, setModal, refetch }) => {
 	}
 
 	return (
-		<div className="max-w-lg rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100 transition-all duration-700 ease-in-out hover:scale-105 h-[800px] relative">
+		<div className="max-w-lg rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100 transition-all duration-700 ease-in-out hover:scale-105 h-[800px] relative mx-auto">
 			<div className="geeks">
 				<img
 					src={image}
@@ -152,20 +152,30 @@ const ProductCard = ({ product, setModal, refetch }) => {
 					</div>
 				</div>
 				<div className="flex text-center items-center w-11/12 absolute bottom-0  footer">
-					{isBuyer ? (
-						<label
-							onClick={() => setModal(product)}
-							className={`${styles.BtnColor}`}
-							htmlFor="booking-modal">
-							Book Now
-						</label>
+					{user?.email ? (
+						<>
+							{isBuyer ? (
+								<label
+									onClick={() => setModal(product)}
+									className={`${styles.BtnColor}`}
+									htmlFor="booking-modal">
+									Book Now
+								</label>
+							) : (
+								<Link
+									onClick={handleLogOut}
+									className={`${styles.BtnColor}`}
+									to={"/login"}>
+									Please Login As A Buyer
+								</Link>
+							)}
+						</>
 					) : (
-						<Link
-							className={`${styles.BtnColor}`}
-							onClick={(() => setModal(product), handleLogOut)}
-							to={"/login"}>
-							Please Login As A Buyer
-						</Link>
+						<>
+							<Link className={`${styles.BtnColor}`} to={"/login"}>
+								Please Login
+							</Link>
+						</>
 					)}
 				</div>
 			</div>

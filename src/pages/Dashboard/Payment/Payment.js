@@ -20,13 +20,12 @@ const Payment = () => {
 		<div className=" mt-10 pb-10">
 			<h3 className={`${styles.SectionHeadText}`}>Payment for {model}</h3>
 			<p className={`${styles.SectionSubText}`}>
-				Please pay <strong>${price}</strong> for your appointment on{" "}
-				
+				Please pay <strong>${price}</strong> for your purchase on {model}{" "}
 			</p>
 			<div className="w-96 my-12 mx-auto">
 				{" "}
 				<Elements stripe={stripePromise}>
-					<CheckOutForm booking={booking}/>
+					<CheckOutForm booking={booking} />
 				</Elements>
 			</div>
 		</div>

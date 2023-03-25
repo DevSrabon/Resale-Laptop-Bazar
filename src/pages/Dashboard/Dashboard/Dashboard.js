@@ -1,27 +1,37 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import { useBookData } from "../../../contexts/BookProvider.js";
 import useBuyer from "../../../hooks/useBuyer";
 import { styles } from "../../../styles";
+import { AiFillDelete } from "react-icons/ai";
+import { toast } from "react-hot-toast";
 
 const Dashboard = () => {
 	const { user } = useContext(AuthContext);
-
 	const [isBuyer] = useBuyer(user?.email);
-	const [bookings, setBookings] = useState([]);
-
-	useEffect(() => {
-		if (user?.email) {
-			fetch(`${process.env.REACT_APP_API_URL}/bookings?email=${user?.email}`, {
+	const { bookings, setRefetch } = useBookData();
+	console.log("🚀 ~ file: Dashboard.js:12 ~ Dashboard ~ bookings:", bookings);
+	const handleDelete = (id) => {
+		if (window.confirm("Are You Want To Delete") === true) {
+			fetch(`${process.env.REACT_APP_API_URL}/book/${id}`, {
+				method: "DELETE",
 				headers: {
-					authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+					authorization: `bearer ${localStorage.getItem("accessToken")}`,
 				},
 			})
 				.then((res) => res.json())
-				.then((data) => setBookings(data));
+				.then((data) => {
+					if (data.acknowledged) {
+						setRefetch((prev) => !prev);
+						toast.success("Deleted");
+					}
+				});
 		}
-	}, [user?.email]);
-
+	};
+	useEffect(() => {
+		window.scrollTo(0,0)
+	},[])
 	return (
 		<>
 			{isBuyer && (
@@ -36,10 +46,12 @@ const Dashboard = () => {
 											<tr>
 												<th>SL.</th>
 												<th>Model</th>
+												<th>Item Image</th>
 												<th>Phone</th>
 												<th>Price</th>
 												<th>Location</th>
 												<th>Payment</th>
+												<th>Delete</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -47,19 +59,30 @@ const Dashboard = () => {
 												<tr key={booking._id}>
 													<th>{i + 1}</th>
 													<td>{booking.model}</td>
+													<td>
+														<img src={booking?.image} className="w-16" alt="" />
+													</td>
 													<td>{booking.phone}</td>
-													<td>{booking.price}</td>
+													<td>${booking.price}</td>
 													<td>{booking.location}</td>
 													<td>
 														{booking?.price && !booking.paid && (
 															<Link to={`/dashboard/payment/${booking._id}`}>
-																<button className="btn btn-primary btn-sm">
+																<button className={styles.SmallBtnColor}>
 																	Pay
 																</button>
 															</Link>
 														)}
 														{booking.price && booking.paid && (
 															<span className="text-accent">Paid</span>
+														)}
+													</td>
+													<td>
+														{!booking.paid && (
+															<AiFillDelete
+																onClick={() => handleDelete(booking._id)}
+																className="text-[green] text-2xl cursor-pointer bg-slate-200 p-1 w-8 h-8 rounded-full"
+															/>
 														)}
 													</td>
 												</tr>

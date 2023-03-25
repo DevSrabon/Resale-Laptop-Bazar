@@ -7,6 +7,7 @@ import useToken from "../../hooks/useToken";
 import { BiUserCircle } from "react-icons/bi";
 import PrimaryButton from "../Shared/PrimaryButton/PrimaryButton";
 import SmallSpinner from "../Shared/Loading/SmaillSpinner";
+import { FcGoogle } from "react-icons/fc";
 const Login = () => {
 	const {
 		register,
@@ -143,7 +144,7 @@ const Login = () => {
 				<button
 					onClick={handleGoogleSignIn}
 					className="btn btn-outline hover:bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] w-full">
-					CONTINUE WITH GOOGLE
+				<FcGoogle className="text-2xl mr-0.5"/>	CONTINUE WITH GOOGLE
 				</button>
 			</div>
 		</div>

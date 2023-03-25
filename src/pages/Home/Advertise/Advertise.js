@@ -1,11 +1,10 @@
 import { MdVerified } from "react-icons/md";
-import moment from "moment";
+import moment, { duration } from "moment";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
-
+import AOS from "aos"
+import 'aos/dist/aos.css'
 import { useQuery } from "@tanstack/react-query";
-
 import "../../Products/styles.css";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import useBuyer from "../../../hooks/useBuyer";
@@ -35,7 +34,6 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 	const remainingLetter = name.slice(1);
 	const capitalizeWord = firstLetter + remainingLetter;
 	const [isBuyer] = useBuyer(user?.email);
-
 	const [userData, setUserData] = useState({});
 	const { data: loadUserData = [], isLoading } = useQuery({
 		queryKey: ["users"],
@@ -50,7 +48,9 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 		const data = loadUserData.find((e) => e.email === email);
 		setUserData(data);
 	}, [email, loadUserData]);
-
+	useEffect(() => {
+	AOS.init({ duration: 1000, delay: 100 });
+},[])
 	const handleReport = (id) => {
 		fetch(`${process.env.REACT_APP_API_URL}/users/report/${id}`, {
 			method: "PUT",
@@ -76,7 +76,10 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 	}
 
 	return (
-		<div className="max-w-lg rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100 transition-all duration-700 ease-in-out hover:scale-105 h-[800px] relative">
+		<div
+			className="max-w-lg rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100 transition-all duration-700 ease-in-out hover:scale-105 h-[800px] relative"
+			data-aos="fade-up"
+			>
 			<div className="geeks">
 				<img
 					src={image}
@@ -96,7 +99,7 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 					<div className="flex justify-between items-center">
 						<div>
 							<p className="font-semibold text-[green] text-xl">
-								${resellPrice}
+								${resellPrice} <del className="text-sm">(${ originalPrice})</del>
 							</p>
 
 							<p>
@@ -114,9 +117,9 @@ const Advertise = ({ advertise, setModal, refetch }) => {
 						<div>
 							{isBuyer && !report && (
 								<button
-									className="bg-gradient-to-r from-[#102001] via-[#0d2202] to-[#3cc20a] text-white  uppercase text-sm px-6 py-1 rounded shadow mr-1 mb-1 cursor-pointer"
+									className={styles.SmallBtnColor}
 									onClick={() => handleReport(_id)}>
-									Report
+									Report To Admin
 								</button>
 							)}
 						</div>

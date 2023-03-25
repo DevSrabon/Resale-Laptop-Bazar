@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styles } from "../../../styles";
-// import logo from "../../../Assets/phones-switch-apps-removebg-preview.png";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const AboutUs = () => {
+	useEffect(() => {
+		AOS.init({ duration: 1000, delay: 100 });
+	}, []);
 	return (
 		<div className="hero my-10">
 			<div className="hero-content p-0 flex-col gap-4 md:gap-12 lg:flex-row">
 				<img
+					data-aos="fade-up"
 					src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
 					alt=""
 					className="md:max-w-sm rounded-lg shadow-2xl"
 				/>
-				<div>
+				<div data-aos="fade-up">
 					<h1 className={`${styles.HomeHeadingText}`}>About Us</h1>
 					<p className="text-xl text-gray-400 text-justify">
 						Laptop Bazar is the best used laptop shop in Bangladesh and a

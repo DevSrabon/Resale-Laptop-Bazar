@@ -115,9 +115,9 @@ export const router = createBrowserRouter([
 			{
 				path: "/dashboard/payment/:id",
 				element: (
-					<PrivateRoute>
+					<BuyerRoute>
 						<Payment></Payment>
-					</PrivateRoute>
+					</BuyerRoute>
 				),
 				loader: ({ params }) =>
 					fetch(`${process.env.REACT_APP_API_URL}/bookings/${params.id}`),

@@ -5,7 +5,16 @@ import useAdmin from "../../hooks/useAdmin";
 import useBuyer from "../../hooks/useBuyer";
 import useSeller from "../../hooks/useSeller";
 import Navbar from "../../pages/Shared/Navbar/Navbar";
+import {
 
+	MdDelete,
+	MdCategory,
+	MdLibraryAdd,
+} from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
+import { BsShopWindow } from "react-icons/bs";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { styles } from "../../styles";
 const DashboardLayout = () => {
 	const { user } = useContext(AuthContext);
 	const [isAdmin] = useAdmin(user?.email);
@@ -29,8 +38,11 @@ const DashboardLayout = () => {
 					<ul className="menu p-2 w-60 bg-base-100 text-[green] text-md font-bold mt-5">
 						<>
 							{isBuyer && (
-								<li>
-									<Link to="/dashboard">My Booking</Link>
+								<li className={styles.DashboardBtn}>
+									<Link to="/dashboard">
+										<AiOutlineShoppingCart className="text-xl -mr-2" /> My
+										Booking
+									</Link>
 								</li>
 							)}
 						</>
@@ -38,11 +50,16 @@ const DashboardLayout = () => {
 							{isSeller && (
 								<>
 									{" "}
-									<li>
-										<Link to="/dashboard/myproduct">My Product</Link>
+									<li className={styles.DashboardBtn}>
+										<Link to="/dashboard/myproduct">
+											<BsShopWindow className="text-xl -mr-2" /> My Product
+										</Link>
 									</li>
-									<li>
-										<Link to="/dashboard/addproduct">Add A Product</Link>
+									<li className={styles.DashboardBtn}>
+										<Link to="/dashboard/addproduct">
+											<MdLibraryAdd className="text-xl -mr-2" />
+											Add A Product
+										</Link>
 									</li>
 								</>
 							)}
@@ -51,14 +68,21 @@ const DashboardLayout = () => {
 						<>
 							{isAdmin && (
 								<>
-									<li>
-										<Link to="/dashboard/allusers">All Users</Link>
+									<li className={styles.DashboardBtn}>
+										<Link to="/dashboard/allusers">
+											<FaUsers className="text-xl -mr-2" /> All Users
+										</Link>
 									</li>
-									<li>
-										<Link to="/dashboard/reports">Reported Items</Link>
+									<li className={styles.DashboardBtn}>
+										<Link to="/dashboard/reports">
+											<MdDelete className="text-xl -mr-2" /> Reported Items
+										</Link>
 									</li>
-									<li>
-										<Link to="/dashboard/addCategories">Add Categories</Link>
+									<li className={styles.DashboardBtn}>
+										<Link to="/dashboard/addCategories">
+											<MdCategory className="text-xl -mr-2" />
+											Add Categories
+										</Link>
 									</li>
 								</>
 							)}

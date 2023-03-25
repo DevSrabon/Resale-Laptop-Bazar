@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { useBookData } from "../../contexts/BookProvider";
 import PrimaryButton from "../Shared/PrimaryButton/PrimaryButton";
 
 const BookingModal = ({ modal, setModal }) => {
 	const { user } = useContext(AuthContext);
-	const { brand, resellPrice, model, _id } = modal;
+	const { brand, resellPrice, model, _id, image } = modal;
+	const { setRefetch } = useBookData();
 
 	const handleBooking = (e) => {
 		e.preventDefault();
@@ -24,6 +26,7 @@ const BookingModal = ({ modal, setModal }) => {
 			phone,
 			model,
 			location,
+			image,
 		};
 		fetch(`${process.env.REACT_APP_API_URL}/bookings`, {
 			method: "POST",
@@ -37,6 +40,7 @@ const BookingModal = ({ modal, setModal }) => {
 				if (data.acknowledged) {
 					setModal(null);
 					toast.success("Booking Confirm");
+					setRefetch((prev) => !prev);
 				} else {
 					toast.error(data.message);
 				}
@@ -99,12 +103,8 @@ const BookingModal = ({ modal, setModal }) => {
 							className="input input-bordered w-full"
 						/>
 						<PrimaryButton>
-						<input
-							htmlFor="booking-modal"
-							type="submit"
-							value="Submit"
-						/>
-</PrimaryButton>
+							<input htmlFor="booking-modal" type="submit" value="Submit" />
+						</PrimaryButton>
 					</form>
 				</div>
 			</div>
@@ -112,4 +112,4 @@ const BookingModal = ({ modal, setModal }) => {
 	);
 };
 
-export default BookingModal
+export default BookingModal;

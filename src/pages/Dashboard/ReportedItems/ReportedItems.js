@@ -81,7 +81,7 @@ const ReportedItems = () => {
 									{reportItem?.report && (
 										<button
 											onClick={() => handleDeleteProduct(reportItem)}
-											className="btn btn-sm btn-danger text-white">
+											className={styles.SmallBtnColor}>
 											Delete
 										</button>
 									)}
