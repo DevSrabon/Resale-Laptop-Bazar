@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useBookData } from "../../../contexts/BookProvider.js";
@@ -11,9 +11,8 @@ const Dashboard = () => {
 	const { user } = useContext(AuthContext);
 	const [isBuyer] = useBuyer(user?.email);
 	const { bookings, setRefetch } = useBookData();
-	console.log("🚀 ~ file: Dashboard.js:12 ~ Dashboard ~ bookings:", bookings);
 	const handleDelete = (id) => {
-		if (window.confirm("Are You Want To Delete") === true) {
+		if (window.confirm("Are You Want To Delete?") === true) {
 			fetch(`${process.env.REACT_APP_API_URL}/book/${id}`, {
 				method: "DELETE",
 				headers: {
@@ -51,6 +50,7 @@ const Dashboard = () => {
 												<th>Price</th>
 												<th>Location</th>
 												<th>Payment</th>
+												<th>View Product</th>
 												<th>Delete</th>
 											</tr>
 										</thead>
@@ -77,14 +77,20 @@ const Dashboard = () => {
 															<span className="text-accent">Paid</span>
 														)}
 													</td>
+													{!booking.paid && (
+														<>
+															<td>
+																<Link to={`/product/detail/${booking._id}`}>View</Link>
+														</td>
 													<td>
-														{!booking.paid && (
 															<AiFillDelete
 																onClick={() => handleDelete(booking._id)}
 																className="text-[green] text-2xl cursor-pointer bg-slate-200 p-1 w-8 h-8 rounded-full"
 															/>
+
+														</td>
+														</>
 														)}
-													</td>
 												</tr>
 											))}
 										</tbody>

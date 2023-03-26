@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { styles } from "../../styles";
 import Spinner from "../Shared/Loading/Loading";
-import BookingModal from "./BookingModal";
 import ProductCard from "./ProductCard";
 
 const Products = () => {

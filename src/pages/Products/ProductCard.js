@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
 
 	return (
 		<section data-aos="fade-up">
-			<div className="max-w-lg rounded-sm shadow-sm dark:bg-gray-900 dark:text-gray-100 transition-all duration-700 ease-in-out hover:shadow-lg  relative group  hover:scale-105">
+			<div className="max-w-lg rounded-sm shadow-sm bg-white dark:text-gray-100 transition-all duration-700 ease-in-out hover:shadow-lg  relative group  hover:scale-105">
 				<div className="geeks">
 					<img
 						src={image}
@@ -85,9 +85,9 @@ const ProductCard = ({ product }) => {
 							</div>
 						</div>
 						<div className="flex flex-row justify-between font-semibold py-2">
-							<Link to={`/${_id}`}>Learn More</Link>
-							<Link to={`/${_id}`} className="hidden group-hover:block ">
-								<BsArrowRightCircle className="text-2xl" />
+							<Link to={`/product/detail/${_id}`}>Learn More</Link>
+							<Link to={`/product/detail/${_id}`} className="hidden group-hover:block ">
+								<BsArrowRightCircle className="text-2xl"/>
 							</Link>
 						</div>
 					</div>

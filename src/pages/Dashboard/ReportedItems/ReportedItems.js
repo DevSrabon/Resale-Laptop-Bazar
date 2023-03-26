@@ -71,7 +71,7 @@ const ReportedItems = () => {
 								<td>{reportItem?.model}</td>
 								<td>
 									<Link
-										to={`/product/${reportItem.brand}`}
+										to={`/product/detail/${reportItem._id}`}
 										className="btn btn-sm btn-danger text-white">
 										Details
 									</Link>

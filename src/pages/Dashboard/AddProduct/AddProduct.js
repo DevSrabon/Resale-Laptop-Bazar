@@ -80,13 +80,13 @@ const [loading, setLoading] = useState(false)
 		return <Loading></Loading>;
 	}
 	return (
-		<div className=" p-7 my-10">
+		<div className=" p-7">
 			<h3 className="text-3xl text-center font-semibold text-[green]">
 				{" "}
 				Sell A Laptop
 			</h3>
 			<form
-				className="flex flex-col justify-evenly items-start gap-4 mt-5 md:flex-row md:gap-10"
+				className="flex flex-col justify-evenly items-start gap-4 mt-5 md:flex-row md:gap-10 border-2 p-3 border-dashed border-green-500"
 				onSubmit={handleSubmit(handleAddProduct)}>
 				<div className="w-full">
 					<div className="form-control w-full ">
