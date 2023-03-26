@@ -5,7 +5,7 @@ import "aos/dist/aos.css";
 
 const AboutUs = () => {
 	useEffect(() => {
-		AOS.init({ duration: 1000, delay: 100 });
+		AOS.init({ duration: 700, delay: 10 });
 	}, []);
 	return (
 		<div className="hero my-10">

@@ -16,25 +16,24 @@ const Categories = () => {
 			},
     });
 useEffect(() => {
-	AOS.init({ duration: 1000, delay: 100 });
+	AOS.init({ duration: 700, delay: 10 });
 }, []);
-	if (isLoading) {
-		return <Loading></Loading>
-	}
-    
-	return (	
-			<div data-aos="fade-up">
-				<h1 className={`${styles.HomeHeadingText}`}>All Category</h1>
-				<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-5 mb-5">
-					{homes?.map((home) => (
-						<Link key={home._id} to={`product/${home.brand}`}>
-							<Category key={home._id} home={home} />
-						</Link>
-					))}
-				</div>
-			</div>
+if (isLoading) {
+	return <Loading></Loading>;
+}
 
-		);
+return (
+	<div data-aos="fade-up">
+		<h1 className={`${styles.HomeHeadingText}`}>All Category</h1>
+		<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-5 mb-5">
+			{homes?.map((home) => (
+				<Link key={home._id} to={`product/${home.brand}`}>
+					<Category key={home._id} home={home} />
+				</Link>
+			))}
+		</div>
+	</div>
+);
 };
 
 export default Categories;

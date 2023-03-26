@@ -12,6 +12,7 @@ import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import MyProducts from "../pages/MyProducts/MyProducts";
 import Products from "../pages/Products/Products";
+import Detail from "../pages/Shared/Detail/Detail";
 import Page404 from "../pages/Shared/Page404/Page404";
 import SignUp from "../pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
@@ -43,23 +44,21 @@ export const router = createBrowserRouter([
 			},
 
 			{
+				path: "/:id",
+				element: <Detail />,
+
+			},
+
+			{
 				path: "/product/:id",
-				element: (
-				
-						<Products />
-					
-				),
+				element: <Products />,
 			},
 		],
 	},
 
 	{
 		path: "/dashboard",
-		element: (
-			
-				<DashboardLayout />
-			
-		),
+		element: <DashboardLayout />,
 		errorElement: <Page404 />,
 		children: [
 			{
@@ -67,7 +66,7 @@ export const router = createBrowserRouter([
 				element: (
 					<PrivateRoute>
 						<BuyerRoute>
-						<Dashboard />
+							<Dashboard />
 						</BuyerRoute>
 					</PrivateRoute>
 				),

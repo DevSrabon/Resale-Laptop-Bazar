@@ -3,7 +3,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 export const Team = () => {
 		useEffect(() => {
-			AOS.init({ duration: 1000, delay: 100 });
+			AOS.init({ duration: 700, delay: 10 });
 		}, []);
 	return (
 		<div
